@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Unit tests + oracle bite-check
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Unit tests (no API keys required)
+        # tests/ uses FakeChatModel — zero real LLM calls.
+        run: pytest tests/ -v --tb=short
+
+      - name: Oracle bite-check (no API keys required)
+        # Runs every benchmark oracle against its UNMIGRATED source_py2.py.
+        # All tests MUST FAIL — a passing oracle means the test does not
+        # exercise the trap and the case must be rewritten.
+        # We invert the exit code: pytest exit 1 (failures found) → success.
+        run: |
+          pytest benchmark/cases/ \
+            --ignore=benchmark/cases/__pycache__ \
+            --override-ini="python_files=test_*.py" \
+            --override-ini="testpaths=benchmark/cases" \
+            -v --tb=line 2>&1 | tee bite_check.log
+          # Verify: every case must have at least one failure.
+          # Exit 0 from pytest here would mean an oracle passes on Py2 source — bad.
+          python - <<'EOF'
+          import re, sys
+          log = open("bite_check.log").read()
+          passed = int(re.search(r"(\d+) passed", log).group(1)) if re.search(r"(\d+) passed", log) else 0
+          if passed > 0:
+              print(f"BITE-CHECK FAILED: {passed} oracle(s) passed on unmigrated source.")
+              print("Every oracle must FAIL on unmigrated source — check the cases above.")
+              sys.exit(1)
+          print("Bite-check OK: all oracles fail on unmigrated source.")
+          EOF
+
+  # Full benchmark runs (claude-*, gemini-*) are intentionally NOT in CI.
+  # They require paid API keys, take ~5 minutes, and are run manually as
+  # measurement events — not on every commit. See README.md → How to run.

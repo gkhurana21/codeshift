@@ -1,7 +1,18 @@
-# Minimal pyproject.toml - exists solely to configure pytest collection.
-# Without this, pytest auto-discovers `samples/migration_demo/test_source_py2.py`,
-# which is the *unmigrated Py2 fixture* the demo migrates - it's supposed to
-# fail on Python 3 by design and should never be part of the project's own
-# test run.
+[project]
+name = "codeshift"
+version = "0.1.0"
+description = "Python 2→3 migration tool powered by an LLM agent with a behavioral benchmark suite"
+authors = [{ name = "gkhurana21" }]
+license = { text = "MIT" }
+requires-python = ">=3.9"
+readme = "README.md"
+
+[project.urls]
+Repository = "https://github.com/gkhurana21/codeshift"
+Issues = "https://github.com/gkhurana21/codeshift/issues"
+
 [tool.pytest.ini_options]
+# testpaths scoped to tests/ only — excludes:
+#   samples/migration_demo/test_source_py2.py  (unmigrated Py2 fixture, fails on Py3 by design)
+#   benchmark/cases/*/test_behavior.py         (oracle bite-check, run separately, needs context)
 testpaths = ["tests"]

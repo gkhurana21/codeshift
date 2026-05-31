@@ -1,7 +1,73 @@
 # CodeShift
 
-A Python 2 → 3 migration tool with an LLM agent, a parso-based static analyzer,
-and a hand-authored behavioral benchmark.
+[![CI](https://github.com/gkhurana21/codeshift/actions/workflows/test.yml/badge.svg)](https://github.com/gkhurana21/codeshift/actions/workflows/test.yml)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**CodeShift migrates Python 2 codebases to Python 3 using an LLM agent that
+verifies behavioral correctness — not just syntax — through a hand-authored
+oracle test suite.**
+
+Unlike `2to3`-style tools that rewrite syntax and stop, CodeShift runs the
+migrated code against behavioral tests that encode what the Py2 program
+*actually did*, catches semantic regressions, and feeds failures back into a
+repair loop until the migration passes or the agent's limits are reached.
+
+### Key benchmark finding
+
+> Gemini 2.5 Flash and Claude Sonnet 4.6 — different providers, a capability
+> tier apart — produce **byte-identical pass/fail on all 41 benchmark cases**
+> (39/41 = 95.1%). Both failures are in the same pre-registered category: a
+> systematic inability to add `raise ... from None` during exception migration.
+> Agents correctly convert `except E, e:` → `except E as e:` but do not
+> suppress `__context__`, leaving the caught exception attached to the re-raise.
+> That this gap is shared across both models suggests it may be a property of
+> LLM exception-semantic reasoning — though n=2, so the claim is suggestive,
+> not conclusive.
+
+| Band | Cases | Gemini 2.5 Flash | Claude Sonnet 4.6 |
+|---|---|---|---|
+| Clean / mechanical | 21 | 21/21 ✓ | 21/21 ✓ |
+| Group A — Undecidable from source | 12 | 12/12 ✓ | 12/12 ✓ |
+| Group B — Decidable, high-miss-risk | 6 | 4/6 | 4/6 |
+| Multi-trap | 2 | 2/2 ✓ | 2/2 ✓ |
+| **Overall** | **41** | **39/41 = 95.1%** | **39/41 = 95.1%** |
+| Total tokens | | 122,748 | 67,527 |
+
+---
+
+## Quickstart
+
+```bash
+git clone https://github.com/gkhurana21/codeshift.git
+cd codeshift
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # add your API key — Gemini free tier works
+```
+
+Migrate a single file:
+```bash
+python -m agent.migrate samples/gnarly_py2.py
+```
+
+Run the full 41-case benchmark (one run, results are locked — do not re-roll):
+```bash
+# Gemini (free tier, good for iteration):
+CODESHIFT_MODEL=gemini-2.5-flash python -m benchmark.run_all
+
+# Claude (paid, canonical measurement):
+python -m benchmark.run_all --model claude-sonnet-4-6
+```
+
+Run the unit test suite (no API keys needed):
+```bash
+pytest tests/
+```
+
+**Model support:** `claude-*` → Anthropic API (`ANTHROPIC_API_KEY`),
+`gemini-*` → Google Gemini (`GEMINI_API_KEY`). Model selection: explicit
+`--model` flag > `$CODESHIFT_MODEL` env var > `config.MODEL_NAME` default.
 
 ---
 
