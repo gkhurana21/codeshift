@@ -1,0 +1,728 @@
+2026-05-30 20:43:29,948 INFO codeshift.benchmark | benchmark runner model=gemini-2.5-flash
+2026-05-30 20:43:31,291 INFO codeshift.llm | GeminiClient initialised model=gemini-2.5-flash temperature=0.0 max_tokens=4096
+2026-05-30 20:43:31,291 INFO codeshift.benchmark | benchmark start cases=41 sandbox=HardenedSubprocessSandbox
+2026-05-30 20:43:31,291 INFO codeshift.benchmark | benchmark case=apply_builtin starting source=source_py2.py
+2026-05-30 20:43:31,294 INFO codeshift.loop | loop start case=apply_builtin source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_zw18y45o
+2026-05-30 20:43:31,344 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/apply_builtin/source_py2.py findings=3 semantic=0 parse_errors=0
+2026-05-30 20:43:31,344 INFO codeshift.loop | iter=0 case=apply_builtin analyzer findings=3 semantic=0 action=baseline_loaded
+2026-05-30 20:43:31,344 INFO codeshift.tools | transform_code mode=initial user_chars=1220
+2026-05-30 20:43:31,344 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1220
+2026-05-30 20:43:33,817 INFO codeshift.llm | llm response tokens in=521 out=334 total=855 chars=253
+2026-05-30 20:43:33,822 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_zw18y45o/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp6w12labg/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_zw18y45o
+I0530 20:43:33.825427 1641655 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:43:34,645 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.82s
+2026-05-30 20:43:34,646 INFO codeshift.loop | iter=1 case=apply_builtin passed=6 failed=0 errors=0 collected=6 tokens_total=855 retry=False action=ran_tests result=best
+2026-05-30 20:43:34,646 INFO codeshift.loop | iter=1 case=apply_builtin action=DONE all_tests_pass
+2026-05-30 20:43:34,646 INFO codeshift.loop | loop end case=apply_builtin status=OK iters=1 tokens=855 best_iter=1 best_passed=6
+2026-05-30 20:43:34,646 INFO codeshift.benchmark | benchmark case=apply_builtin status=PASS migration=OK iters=1 tokens=855 oracle=6/6 duration=3.4s
+2026-05-30 20:43:34,646 INFO codeshift.benchmark | benchmark case=bandwidth_estimator starting source=source_py2.py
+2026-05-30 20:43:34,648 INFO codeshift.loop | loop start case=bandwidth_estimator source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_8frose38
+2026-05-30 20:43:34,651 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/bandwidth_estimator/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 20:43:34,651 INFO codeshift.loop | iter=0 case=bandwidth_estimator analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 20:43:34,651 INFO codeshift.tools | transform_code mode=initial user_chars=1547
+2026-05-30 20:43:34,651 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1547
+2026-05-30 20:43:39,744 INFO codeshift.llm | llm response tokens in=567 out=1003 total=1570 chars=298
+2026-05-30 20:43:39,746 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_8frose38/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpvzvdm0hu/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_8frose38
+I0530 20:43:39.751227 1641844 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:43:40,524 INFO codeshift.sandbox.hardened | hardened sandbox result passed=0 failed=3 errors=0 collected=3 timed_out=False duration=0.78s
+2026-05-30 20:43:40,524 INFO codeshift.loop | iter=1 case=bandwidth_estimator passed=0 failed=3 errors=0 collected=3 tokens_total=1570 retry=False action=ran_tests result=best
+2026-05-30 20:43:40,525 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=2549
+2026-05-30 20:43:40,525 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2549
+2026-05-30 20:43:45,538 INFO codeshift.llm | llm response tokens in=1078 out=1037 total=2115 chars=301
+2026-05-30 20:43:45,541 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_8frose38/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpwqq13gc4/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_8frose38
+I0530 20:43:45.553083 1642012 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:43:46,285 INFO codeshift.sandbox.hardened | hardened sandbox result passed=3 failed=0 errors=0 collected=3 timed_out=False duration=0.74s
+2026-05-30 20:43:46,286 INFO codeshift.loop | iter=2 case=bandwidth_estimator passed=3 failed=0 errors=0 collected=3 tokens_total=3685 retry=False action=ran_tests result=best
+2026-05-30 20:43:46,286 INFO codeshift.loop | iter=2 case=bandwidth_estimator action=DONE all_tests_pass
+2026-05-30 20:43:46,286 INFO codeshift.loop | loop end case=bandwidth_estimator status=OK iters=2 tokens=3685 best_iter=2 best_passed=3
+2026-05-30 20:43:46,286 INFO codeshift.benchmark | benchmark case=bandwidth_estimator status=PASS migration=OK iters=2 tokens=3685 oracle=3/3 duration=11.6s
+2026-05-30 20:43:46,286 INFO codeshift.benchmark | benchmark case=basestring_isinstance starting source=source_py2.py
+2026-05-30 20:43:46,288 INFO codeshift.loop | loop start case=basestring_isinstance source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_d2bnvmiv
+2026-05-30 20:43:46,291 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/basestring_isinstance/source_py2.py findings=4 semantic=4 parse_errors=0
+2026-05-30 20:43:46,291 INFO codeshift.loop | iter=0 case=basestring_isinstance analyzer findings=4 semantic=4 action=baseline_loaded
+2026-05-30 20:43:46,291 INFO codeshift.tools | transform_code mode=initial user_chars=1582
+2026-05-30 20:43:46,291 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1582
+2026-05-30 20:43:48,174 INFO codeshift.llm | llm response tokens in=604 out=283 total=887 chars=426
+2026-05-30 20:43:48,177 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_d2bnvmiv/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpuslo7i1s/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_d2bnvmiv
+I0530 20:43:48.186666 1642048 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:43:48,803 INFO codeshift.sandbox.hardened | hardened sandbox result passed=10 failed=0 errors=0 collected=10 timed_out=False duration=0.63s
+2026-05-30 20:43:48,804 INFO codeshift.loop | iter=1 case=basestring_isinstance passed=10 failed=0 errors=0 collected=10 tokens_total=887 retry=False action=ran_tests result=best
+2026-05-30 20:43:48,804 INFO codeshift.loop | iter=1 case=basestring_isinstance action=DONE all_tests_pass
+2026-05-30 20:43:48,804 INFO codeshift.loop | loop end case=basestring_isinstance status=OK iters=1 tokens=887 best_iter=1 best_passed=10
+2026-05-30 20:43:48,804 INFO codeshift.benchmark | benchmark case=basestring_isinstance status=PASS migration=OK iters=1 tokens=887 oracle=10/10 duration=2.5s
+2026-05-30 20:43:48,804 INFO codeshift.benchmark | benchmark case=cmp_builtin starting source=source_py2.py
+2026-05-30 20:43:48,806 INFO codeshift.loop | loop start case=cmp_builtin source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ge73umlk
+2026-05-30 20:43:48,809 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/cmp_builtin/source_py2.py findings=6 semantic=6 parse_errors=0
+2026-05-30 20:43:48,809 INFO codeshift.loop | iter=0 case=cmp_builtin analyzer findings=6 semantic=6 action=baseline_loaded
+2026-05-30 20:43:48,809 INFO codeshift.tools | transform_code mode=initial user_chars=1905
+2026-05-30 20:43:48,809 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1905
+2026-05-30 20:43:56,871 INFO codeshift.llm | llm response tokens in=725 out=1772 total=2497 chars=894
+2026-05-30 20:43:56,874 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ge73umlk/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpjzhhfh5q/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ge73umlk
+I0530 20:43:56.878942 1642171 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:43:57,515 INFO codeshift.sandbox.hardened | hardened sandbox result passed=11 failed=0 errors=0 collected=11 timed_out=False duration=0.64s
+2026-05-30 20:43:57,516 INFO codeshift.loop | iter=1 case=cmp_builtin passed=11 failed=0 errors=0 collected=11 tokens_total=2497 retry=False action=ran_tests result=best
+2026-05-30 20:43:57,516 INFO codeshift.loop | iter=1 case=cmp_builtin action=DONE all_tests_pass
+2026-05-30 20:43:57,516 INFO codeshift.loop | loop end case=cmp_builtin status=OK iters=1 tokens=2497 best_iter=1 best_passed=11
+2026-05-30 20:43:57,516 INFO codeshift.benchmark | benchmark case=cmp_builtin status=PASS migration=OK iters=1 tokens=2497 oracle=11/11 duration=8.7s
+2026-05-30 20:43:57,516 INFO codeshift.benchmark | benchmark case=column_merger starting source=source_py2.py
+2026-05-30 20:43:57,518 INFO codeshift.loop | loop start case=column_merger source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_6m9r6lmo
+2026-05-30 20:43:57,520 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/column_merger/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 20:43:57,520 INFO codeshift.loop | iter=0 case=column_merger analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 20:43:57,520 INFO codeshift.tools | transform_code mode=initial user_chars=953
+2026-05-30 20:43:57,521 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=953
+2026-05-30 20:44:06,112 INFO codeshift.llm | llm response tokens in=438 out=1804 total=2242 chars=404
+2026-05-30 20:44:06,114 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_6m9r6lmo/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp5cejkum6/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_6m9r6lmo
+I0530 20:44:06.119075 1642265 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:44:06,761 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.65s
+2026-05-30 20:44:06,761 INFO codeshift.loop | iter=1 case=column_merger passed=7 failed=0 errors=0 collected=7 tokens_total=2242 retry=False action=ran_tests result=best
+2026-05-30 20:44:06,761 INFO codeshift.loop | iter=1 case=column_merger action=DONE all_tests_pass
+2026-05-30 20:44:06,762 INFO codeshift.loop | loop end case=column_merger status=OK iters=1 tokens=2242 best_iter=1 best_passed=7
+2026-05-30 20:44:06,762 INFO codeshift.benchmark | benchmark case=column_merger status=PASS migration=OK iters=1 tokens=2242 oracle=7/7 duration=9.2s
+2026-05-30 20:44:06,762 INFO codeshift.benchmark | benchmark case=config_value_encoder starting source=source_py2.py
+2026-05-30 20:44:06,763 INFO codeshift.loop | loop start case=config_value_encoder source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ow_ja_zv
+2026-05-30 20:44:06,767 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/config_value_encoder/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 20:44:06,767 INFO codeshift.loop | iter=0 case=config_value_encoder analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 20:44:06,767 INFO codeshift.tools | transform_code mode=initial user_chars=1327
+2026-05-30 20:44:06,767 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1327
+2026-05-30 20:44:11,586 INFO codeshift.llm | llm response tokens in=529 out=996 total=1525 chars=711
+2026-05-30 20:44:11,589 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ow_ja_zv/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpl59o1l29/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ow_ja_zv
+I0530 20:44:11.591956 1642345 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:44:12,263 INFO codeshift.sandbox.hardened | hardened sandbox result passed=0 failed=7 errors=0 collected=7 timed_out=False duration=0.67s
+2026-05-30 20:44:12,264 INFO codeshift.loop | iter=1 case=config_value_encoder passed=0 failed=7 errors=0 collected=7 tokens_total=1525 retry=False action=ran_tests result=best
+2026-05-30 20:44:12,264 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=2735
+2026-05-30 20:44:12,264 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2735
+2026-05-30 20:44:29,028 INFO codeshift.llm | llm response tokens in=1044 out=3490 total=4534 chars=730
+2026-05-30 20:44:29,030 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ow_ja_zv/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmplhhi3n84/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ow_ja_zv
+I0530 20:44:29.037284 1642538 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:44:29,755 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.72s
+2026-05-30 20:44:29,756 INFO codeshift.loop | iter=2 case=config_value_encoder passed=7 failed=0 errors=0 collected=7 tokens_total=6059 retry=False action=ran_tests result=best
+2026-05-30 20:44:29,756 INFO codeshift.loop | iter=2 case=config_value_encoder action=DONE all_tests_pass
+2026-05-30 20:44:29,756 INFO codeshift.loop | loop end case=config_value_encoder status=OK iters=2 tokens=6059 best_iter=2 best_passed=7
+2026-05-30 20:44:29,756 INFO codeshift.benchmark | benchmark case=config_value_encoder status=PASS migration=OK iters=2 tokens=6059 oracle=7/7 duration=23.0s
+2026-05-30 20:44:29,756 INFO codeshift.benchmark | benchmark case=csv_field_builder starting source=source_py2.py
+2026-05-30 20:44:29,760 INFO codeshift.loop | loop start case=csv_field_builder source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_9zkke6vm
+2026-05-30 20:44:29,763 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/csv_field_builder/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 20:44:29,763 INFO codeshift.loop | iter=0 case=csv_field_builder analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 20:44:29,763 INFO codeshift.tools | transform_code mode=initial user_chars=929
+2026-05-30 20:44:29,763 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=929
+2026-05-30 20:44:33,128 INFO codeshift.llm | llm response tokens in=420 out=616 total=1036 chars=313
+2026-05-30 20:44:33,134 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_9zkke6vm/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp9p1464de/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_9zkke6vm
+I0530 20:44:33.138100 1642591 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:44:33,776 INFO codeshift.sandbox.hardened | hardened sandbox result passed=0 failed=6 errors=0 collected=6 timed_out=False duration=0.64s
+2026-05-30 20:44:33,777 INFO codeshift.loop | iter=1 case=csv_field_builder passed=0 failed=6 errors=0 collected=6 tokens_total=1036 retry=False action=ran_tests result=best
+2026-05-30 20:44:33,777 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=1987
+2026-05-30 20:44:33,777 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1987
+2026-05-30 20:44:45,504 INFO codeshift.llm | llm response tokens in=870 out=2337 total=3207 chars=593
+2026-05-30 20:44:45,506 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_9zkke6vm/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpoui316o1/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_9zkke6vm
+I0530 20:44:45.510664 1642719 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:44:46,124 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.62s
+2026-05-30 20:44:46,125 INFO codeshift.loop | iter=2 case=csv_field_builder passed=6 failed=0 errors=0 collected=6 tokens_total=4243 retry=False action=ran_tests result=best
+2026-05-30 20:44:46,125 INFO codeshift.loop | iter=2 case=csv_field_builder action=DONE all_tests_pass
+2026-05-30 20:44:46,125 INFO codeshift.loop | loop end case=csv_field_builder status=OK iters=2 tokens=4243 best_iter=2 best_passed=6
+2026-05-30 20:44:46,125 INFO codeshift.benchmark | benchmark case=csv_field_builder status=PASS migration=OK iters=2 tokens=4243 oracle=6/6 duration=16.4s
+2026-05-30 20:44:46,125 INFO codeshift.benchmark | benchmark case=dict_iteration starting source=source_py2.py
+2026-05-30 20:44:46,127 INFO codeshift.loop | loop start case=dict_iteration source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_pgb9ps13
+2026-05-30 20:44:46,131 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/dict_iteration/source_py2.py findings=4 semantic=4 parse_errors=0
+2026-05-30 20:44:46,131 INFO codeshift.loop | iter=0 case=dict_iteration analyzer findings=4 semantic=4 action=baseline_loaded
+2026-05-30 20:44:46,132 INFO codeshift.tools | transform_code mode=initial user_chars=3343
+2026-05-30 20:44:46,132 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=3343
+2026-05-30 20:44:51,568 INFO codeshift.llm | llm response tokens in=1096 out=1076 total=2172 chars=1410
+2026-05-30 20:44:51,570 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_pgb9ps13/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpqc6tudwc/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_pgb9ps13
+I0530 20:44:51.573865 1642832 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:44:52,192 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.62s
+2026-05-30 20:44:52,192 INFO codeshift.loop | iter=1 case=dict_iteration passed=7 failed=0 errors=0 collected=7 tokens_total=2172 retry=False action=ran_tests result=best
+2026-05-30 20:44:52,192 INFO codeshift.loop | iter=1 case=dict_iteration action=DONE all_tests_pass
+2026-05-30 20:44:52,193 INFO codeshift.loop | loop end case=dict_iteration status=OK iters=1 tokens=2172 best_iter=1 best_passed=7
+2026-05-30 20:44:52,193 INFO codeshift.benchmark | benchmark case=dict_iteration status=PASS migration=OK iters=1 tokens=2172 oracle=7/7 duration=6.1s
+2026-05-30 20:44:52,193 INFO codeshift.benchmark | benchmark case=dict_view_index starting source=source_py2.py
+2026-05-30 20:44:52,195 INFO codeshift.loop | loop start case=dict_view_index source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_clxi82gg
+2026-05-30 20:44:52,200 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/dict_view_index/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 20:44:52,201 INFO codeshift.loop | iter=0 case=dict_view_index analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 20:44:52,201 INFO codeshift.tools | transform_code mode=initial user_chars=2403
+2026-05-30 20:44:52,201 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2403
+2026-05-30 20:44:56,636 INFO codeshift.llm | llm response tokens in=878 out=1026 total=1904 chars=1097
+2026-05-30 20:44:56,638 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_clxi82gg/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpc01d852m/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_clxi82gg
+I0530 20:44:56.642358 1642900 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:44:57,261 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.62s
+2026-05-30 20:44:57,261 INFO codeshift.loop | iter=1 case=dict_view_index passed=7 failed=0 errors=0 collected=7 tokens_total=1904 retry=False action=ran_tests result=best
+2026-05-30 20:44:57,261 INFO codeshift.loop | iter=1 case=dict_view_index action=DONE all_tests_pass
+2026-05-30 20:44:57,262 INFO codeshift.loop | loop end case=dict_view_index status=OK iters=1 tokens=1904 best_iter=1 best_passed=7
+2026-05-30 20:44:57,262 INFO codeshift.benchmark | benchmark case=dict_view_index status=PASS migration=OK iters=1 tokens=1904 oracle=7/7 duration=5.1s
+2026-05-30 20:44:57,262 INFO codeshift.benchmark | benchmark case=error_translator starting source=source_py2.py
+2026-05-30 20:44:57,263 INFO codeshift.loop | loop start case=error_translator source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_4khuww7c
+2026-05-30 20:44:57,267 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/error_translator/source_py2.py findings=4 semantic=1 parse_errors=0
+2026-05-30 20:44:57,267 INFO codeshift.loop | iter=0 case=error_translator analyzer findings=4 semantic=1 action=baseline_loaded
+2026-05-30 20:44:57,267 INFO codeshift.tools | transform_code mode=initial user_chars=1696
+2026-05-30 20:44:57,267 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1696
+2026-05-30 20:45:03,027 INFO codeshift.llm | llm response tokens in=609 out=1190 total=1799 chars=531
+2026-05-30 20:45:03,029 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_4khuww7c/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpvam5pjxf/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_4khuww7c
+I0530 20:45:03.036787 1643020 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:45:03,693 INFO codeshift.sandbox.hardened | hardened sandbox result passed=3 failed=3 errors=0 collected=6 timed_out=False duration=0.66s
+2026-05-30 20:45:03,694 INFO codeshift.loop | iter=1 case=error_translator passed=3 failed=3 errors=0 collected=6 tokens_total=1799 retry=False action=ran_tests result=best
+2026-05-30 20:45:03,694 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=4103
+2026-05-30 20:45:03,694 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=4103
+2026-05-30 20:45:08,171 INFO codeshift.llm | llm response tokens in=1326 out=711 total=2037 chars=551
+2026-05-30 20:45:08,174 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_4khuww7c/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpdxr_1ldm/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_4khuww7c
+I0530 20:45:08.178172 1643067 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:45:08,818 INFO codeshift.sandbox.hardened | hardened sandbox result passed=3 failed=3 errors=0 collected=6 timed_out=False duration=0.64s
+2026-05-30 20:45:08,818 INFO codeshift.loop | iter=2 case=error_translator passed=3 failed=3 errors=0 collected=6 tokens_total=3836 retry=False action=ran_tests result=no_improve
+2026-05-30 20:45:08,818 INFO codeshift.tools | transform_code mode=repair iter=3 user_chars=4123
+2026-05-30 20:45:08,818 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=4123
+2026-05-30 20:45:28,618 INFO codeshift.llm | llm response tokens in=1330 out=4092 total=5422 chars=722
+2026-05-30 20:45:28,619 WARNING codeshift.tools | transform_code parse failed on first try: IndentationError: expected an indented block after 'except' statement on line 11 at line 17, col 68 - retrying
+2026-05-30 20:45:28,619 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=4452
+2026-05-30 20:45:49,969 INFO codeshift.llm | llm response tokens in=1414 out=4082 total=5496 chars=551
+2026-05-30 20:45:49,971 WARNING codeshift.loop | iter=3 case=error_translator action=oscillation_break identical_to_iter=2 - stopping early
+2026-05-30 20:45:49,972 INFO codeshift.loop | loop end case=error_translator status=OSCILLATION iters=2 tokens=14754 best_iter=1 best_passed=3
+2026-05-30 20:45:49,972 INFO codeshift.benchmark | benchmark case=error_translator status=FAIL migration=OSCILLATION iters=2 tokens=14754 oracle=3/6 duration=52.7s
+2026-05-30 20:45:49,972 INFO codeshift.benchmark | benchmark case=exception_syntax starting source=source_py2.py
+2026-05-30 20:45:49,975 INFO codeshift.loop | loop start case=exception_syntax source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work__n337r5f
+2026-05-30 20:45:49,982 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/exception_syntax/source_py2.py findings=5 semantic=1 parse_errors=0
+2026-05-30 20:45:49,982 INFO codeshift.loop | iter=0 case=exception_syntax analyzer findings=5 semantic=1 action=baseline_loaded
+2026-05-30 20:45:49,983 INFO codeshift.tools | transform_code mode=initial user_chars=2522
+2026-05-30 20:45:49,983 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2522
+2026-05-30 20:45:53,788 INFO codeshift.llm | llm response tokens in=823 out=717 total=1540 chars=1242
+2026-05-30 20:45:53,793 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work__n337r5f/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp9zvl27h3/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work__n337r5f
+I0530 20:45:53.799678 1643633 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:45:54,521 INFO codeshift.sandbox.hardened | hardened sandbox result passed=9 failed=0 errors=0 collected=9 timed_out=False duration=0.73s
+2026-05-30 20:45:54,521 INFO codeshift.loop | iter=1 case=exception_syntax passed=9 failed=0 errors=0 collected=9 tokens_total=1540 retry=False action=ran_tests result=best
+2026-05-30 20:45:54,521 INFO codeshift.loop | iter=1 case=exception_syntax action=DONE all_tests_pass
+2026-05-30 20:45:54,522 INFO codeshift.loop | loop end case=exception_syntax status=OK iters=1 tokens=1540 best_iter=1 best_passed=9
+2026-05-30 20:45:54,522 INFO codeshift.benchmark | benchmark case=exception_syntax status=PASS migration=OK iters=1 tokens=1540 oracle=9/9 duration=4.5s
+2026-05-30 20:45:54,522 INFO codeshift.benchmark | benchmark case=exec_statement starting source=source_py2.py
+2026-05-30 20:45:54,523 INFO codeshift.loop | loop start case=exec_statement source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_icjmz_iu
+2026-05-30 20:45:54,527 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/exec_statement/source_py2.py findings=3 semantic=0 parse_errors=0
+2026-05-30 20:45:54,527 INFO codeshift.loop | iter=0 case=exec_statement analyzer findings=3 semantic=0 action=baseline_loaded
+2026-05-30 20:45:54,527 INFO codeshift.tools | transform_code mode=initial user_chars=1463
+2026-05-30 20:45:54,527 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1463
+2026-05-30 20:45:56,202 INFO codeshift.llm | llm response tokens in=568 out=319 total=887 chars=530
+2026-05-30 20:45:56,204 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_icjmz_iu/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp8ndtyeqa/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_icjmz_iu
+I0530 20:45:56.208242 1643669 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:45:56,872 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.67s
+2026-05-30 20:45:56,873 INFO codeshift.loop | iter=1 case=exec_statement passed=6 failed=0 errors=0 collected=6 tokens_total=887 retry=False action=ran_tests result=best
+2026-05-30 20:45:56,873 INFO codeshift.loop | iter=1 case=exec_statement action=DONE all_tests_pass
+2026-05-30 20:45:56,874 INFO codeshift.loop | loop end case=exec_statement status=OK iters=1 tokens=887 best_iter=1 best_passed=6
+2026-05-30 20:45:56,874 INFO codeshift.benchmark | benchmark case=exec_statement status=PASS migration=OK iters=1 tokens=887 oracle=6/6 duration=2.4s
+2026-05-30 20:45:56,874 INFO codeshift.benchmark | benchmark case=frame_buffer starting source=source_py2.py
+2026-05-30 20:45:56,876 INFO codeshift.loop | loop start case=frame_buffer source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_oa43g0kx
+2026-05-30 20:45:56,879 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/frame_buffer/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 20:45:56,880 INFO codeshift.loop | iter=0 case=frame_buffer analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 20:45:56,880 INFO codeshift.tools | transform_code mode=initial user_chars=1014
+2026-05-30 20:45:56,880 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1014
+2026-05-30 20:46:02,194 INFO codeshift.llm | llm response tokens in=455 out=1076 total=1531 chars=400
+2026-05-30 20:46:02,196 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_oa43g0kx/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpo3s4g2cu/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_oa43g0kx
+I0530 20:46:02.201142 1643751 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:02,821 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.62s
+2026-05-30 20:46:02,822 INFO codeshift.loop | iter=1 case=frame_buffer passed=7 failed=0 errors=0 collected=7 tokens_total=1531 retry=False action=ran_tests result=best
+2026-05-30 20:46:02,822 INFO codeshift.loop | iter=1 case=frame_buffer action=DONE all_tests_pass
+2026-05-30 20:46:02,822 INFO codeshift.loop | loop end case=frame_buffer status=OK iters=1 tokens=1531 best_iter=1 best_passed=7
+2026-05-30 20:46:02,822 INFO codeshift.benchmark | benchmark case=frame_buffer status=PASS migration=OK iters=1 tokens=1531 oracle=7/7 duration=6.0s
+2026-05-30 20:46:02,822 INFO codeshift.benchmark | benchmark case=has_key_method starting source=source_py2.py
+2026-05-30 20:46:02,824 INFO codeshift.loop | loop start case=has_key_method source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_kimfqwwa
+2026-05-30 20:46:02,827 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/has_key_method/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 20:46:02,827 INFO codeshift.loop | iter=0 case=has_key_method analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 20:46:02,827 INFO codeshift.tools | transform_code mode=initial user_chars=2018
+2026-05-30 20:46:02,827 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2018
+2026-05-30 20:46:04,650 INFO codeshift.llm | llm response tokens in=746 out=350 total=1096 chars=361
+2026-05-30 20:46:04,652 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_kimfqwwa/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpkild_c3w/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_kimfqwwa
+I0530 20:46:04.655753 1643792 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:05,289 INFO codeshift.sandbox.hardened | hardened sandbox result passed=8 failed=0 errors=0 collected=8 timed_out=False duration=0.64s
+2026-05-30 20:46:05,289 INFO codeshift.loop | iter=1 case=has_key_method passed=8 failed=0 errors=0 collected=8 tokens_total=1096 retry=False action=ran_tests result=best
+2026-05-30 20:46:05,289 INFO codeshift.loop | iter=1 case=has_key_method action=DONE all_tests_pass
+2026-05-30 20:46:05,290 INFO codeshift.loop | loop end case=has_key_method status=OK iters=1 tokens=1096 best_iter=1 best_passed=8
+2026-05-30 20:46:05,290 INFO codeshift.benchmark | benchmark case=has_key_method status=PASS migration=OK iters=1 tokens=1096 oracle=8/8 duration=2.5s
+2026-05-30 20:46:05,290 INFO codeshift.benchmark | benchmark case=http_body_processor starting source=source_py2.py
+2026-05-30 20:46:05,291 INFO codeshift.loop | loop start case=http_body_processor source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh
+2026-05-30 20:46:05,295 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/http_body_processor/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 20:46:05,295 INFO codeshift.loop | iter=0 case=http_body_processor analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 20:46:05,296 INFO codeshift.tools | transform_code mode=initial user_chars=1254
+2026-05-30 20:46:05,296 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1254
+2026-05-30 20:46:17,063 INFO codeshift.llm | llm response tokens in=536 out=2356 total=2892 chars=638
+2026-05-30 20:46:17,067 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp99yk5yk4/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh
+I0530 20:46:17.077513 1643915 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:17,856 INFO codeshift.sandbox.hardened | hardened sandbox result passed=0 failed=7 errors=0 collected=7 timed_out=False duration=0.79s
+2026-05-30 20:46:17,857 INFO codeshift.loop | iter=1 case=http_body_processor passed=0 failed=7 errors=0 collected=7 tokens_total=2892 retry=False action=ran_tests result=best
+2026-05-30 20:46:17,857 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=2669
+2026-05-30 20:46:17,857 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2669
+2026-05-30 20:46:24,718 INFO codeshift.llm | llm response tokens in=1031 out=1463 total=2494 chars=641
+2026-05-30 20:46:24,721 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpa_5pt7fp/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh
+I0530 20:46:24.725938 1643998 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:25,377 INFO codeshift.sandbox.hardened | hardened sandbox result passed=3 failed=4 errors=0 collected=7 timed_out=False duration=0.66s
+2026-05-30 20:46:25,378 INFO codeshift.loop | iter=2 case=http_body_processor passed=3 failed=4 errors=0 collected=7 tokens_total=5386 retry=False action=ran_tests result=best
+2026-05-30 20:46:25,378 INFO codeshift.tools | transform_code mode=repair iter=3 user_chars=2655
+2026-05-30 20:46:25,378 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2655
+2026-05-30 20:46:29,959 INFO codeshift.llm | llm response tokens in=1051 out=1038 total=2089 chars=643
+2026-05-30 20:46:29,961 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpyc1sq8ug/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh
+I0530 20:46:29.968720 1644053 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:30,637 INFO codeshift.sandbox.hardened | hardened sandbox result passed=5 failed=2 errors=0 collected=7 timed_out=False duration=0.68s
+2026-05-30 20:46:30,637 INFO codeshift.loop | iter=3 case=http_body_processor passed=5 failed=2 errors=0 collected=7 tokens_total=7475 retry=False action=ran_tests result=best
+2026-05-30 20:46:30,637 INFO codeshift.tools | transform_code mode=repair iter=4 user_chars=2619
+2026-05-30 20:46:30,637 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2619
+2026-05-30 20:46:32,974 INFO codeshift.llm | llm response tokens in=1048 out=494 total=1542 chars=644
+2026-05-30 20:46:32,977 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpnugj9dor/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_lddrw1lh
+I0530 20:46:34.160723 1644128 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:34,808 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=1.83s
+2026-05-30 20:46:34,808 INFO codeshift.loop | iter=4 case=http_body_processor passed=7 failed=0 errors=0 collected=7 tokens_total=9017 retry=False action=ran_tests result=best
+2026-05-30 20:46:34,808 INFO codeshift.loop | iter=4 case=http_body_processor action=DONE all_tests_pass
+2026-05-30 20:46:34,809 INFO codeshift.loop | loop end case=http_body_processor status=OK iters=4 tokens=9017 best_iter=4 best_passed=7
+2026-05-30 20:46:34,809 INFO codeshift.benchmark | benchmark case=http_body_processor status=PASS migration=OK iters=4 tokens=9017 oracle=7/7 duration=29.5s
+2026-05-30 20:46:34,809 INFO codeshift.benchmark | benchmark case=integer_division starting source=source_py2.py
+2026-05-30 20:46:34,811 INFO codeshift.loop | loop start case=integer_division source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_msf9htlb
+2026-05-30 20:46:34,816 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/integer_division/source_py2.py findings=5 semantic=5 parse_errors=0
+2026-05-30 20:46:34,816 INFO codeshift.loop | iter=0 case=integer_division analyzer findings=5 semantic=5 action=baseline_loaded
+2026-05-30 20:46:34,817 INFO codeshift.tools | transform_code mode=initial user_chars=2831
+2026-05-30 20:46:34,817 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2831
+2026-05-30 20:46:39,052 INFO codeshift.llm | llm response tokens in=910 out=918 total=1828 chars=1329
+2026-05-30 20:46:39,056 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_msf9htlb/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpqg6nq_y1/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_msf9htlb
+I0530 20:46:39.061193 1644226 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:39,674 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.62s
+2026-05-30 20:46:39,674 INFO codeshift.loop | iter=1 case=integer_division passed=6 failed=0 errors=0 collected=6 tokens_total=1828 retry=False action=ran_tests result=best
+2026-05-30 20:46:39,675 INFO codeshift.loop | iter=1 case=integer_division action=DONE all_tests_pass
+2026-05-30 20:46:39,675 INFO codeshift.loop | loop end case=integer_division status=OK iters=1 tokens=1828 best_iter=1 best_passed=6
+2026-05-30 20:46:39,675 INFO codeshift.benchmark | benchmark case=integer_division status=PASS migration=OK iters=1 tokens=1828 oracle=6/6 duration=4.9s
+2026-05-30 20:46:39,675 INFO codeshift.benchmark | benchmark case=iterator_next starting source=source_py2.py
+2026-05-30 20:46:39,676 INFO codeshift.loop | loop start case=iterator_next source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ohval95g
+2026-05-30 20:46:39,679 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/iterator_next/source_py2.py findings=3 semantic=0 parse_errors=0
+2026-05-30 20:46:39,679 INFO codeshift.loop | iter=0 case=iterator_next analyzer findings=3 semantic=0 action=baseline_loaded
+2026-05-30 20:46:39,679 INFO codeshift.tools | transform_code mode=initial user_chars=1347
+2026-05-30 20:46:39,679 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1347
+2026-05-30 20:46:41,490 INFO codeshift.llm | llm response tokens in=538 out=340 total=878 chars=434
+2026-05-30 20:46:41,493 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ohval95g/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpibq0z22z/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ohval95g
+I0530 20:46:41.499216 1644285 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:42,936 INFO codeshift.sandbox.hardened | hardened sandbox result passed=5 failed=0 errors=0 collected=5 timed_out=False duration=1.44s
+2026-05-30 20:46:42,937 INFO codeshift.loop | iter=1 case=iterator_next passed=5 failed=0 errors=0 collected=5 tokens_total=878 retry=False action=ran_tests result=best
+2026-05-30 20:46:42,937 INFO codeshift.loop | iter=1 case=iterator_next action=DONE all_tests_pass
+2026-05-30 20:46:42,938 INFO codeshift.loop | loop end case=iterator_next status=OK iters=1 tokens=878 best_iter=1 best_passed=5
+2026-05-30 20:46:42,938 INFO codeshift.benchmark | benchmark case=iterator_next status=PASS migration=OK iters=1 tokens=878 oracle=5/5 duration=3.3s
+2026-05-30 20:46:42,938 INFO codeshift.benchmark | benchmark case=itertools_izip_imap starting source=source_py2.py
+2026-05-30 20:46:42,940 INFO codeshift.loop | loop start case=itertools_izip_imap source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_3x0oa4ql
+2026-05-30 20:46:42,944 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/itertools_izip_imap/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 20:46:42,944 INFO codeshift.loop | iter=0 case=itertools_izip_imap analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 20:46:42,944 INFO codeshift.tools | transform_code mode=initial user_chars=1102
+2026-05-30 20:46:42,944 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1102
+2026-05-30 20:46:48,836 INFO codeshift.llm | llm response tokens in=510 out=1132 total=1642 chars=441
+2026-05-30 20:46:48,837 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_3x0oa4ql/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpvd5k37ol/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_3x0oa4ql
+I0530 20:46:48.841010 1644458 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:49,405 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.57s
+2026-05-30 20:46:49,406 INFO codeshift.loop | iter=1 case=itertools_izip_imap passed=6 failed=0 errors=0 collected=6 tokens_total=1642 retry=False action=ran_tests result=best
+2026-05-30 20:46:49,406 INFO codeshift.loop | iter=1 case=itertools_izip_imap action=DONE all_tests_pass
+2026-05-30 20:46:49,406 INFO codeshift.loop | loop end case=itertools_izip_imap status=OK iters=1 tokens=1642 best_iter=1 best_passed=6
+2026-05-30 20:46:49,406 INFO codeshift.benchmark | benchmark case=itertools_izip_imap status=PASS migration=OK iters=1 tokens=1642 oracle=6/6 duration=6.5s
+2026-05-30 20:46:49,406 INFO codeshift.benchmark | benchmark case=legacy_io_handler starting source=source_py2.py
+2026-05-30 20:46:49,408 INFO codeshift.loop | loop start case=legacy_io_handler source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_nm83fb_c
+2026-05-30 20:46:49,413 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/legacy_io_handler/source_py2.py findings=4 semantic=4 parse_errors=0
+2026-05-30 20:46:49,413 INFO codeshift.loop | iter=0 case=legacy_io_handler analyzer findings=4 semantic=4 action=baseline_loaded
+2026-05-30 20:46:49,413 INFO codeshift.tools | transform_code mode=initial user_chars=2153
+2026-05-30 20:46:49,413 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2153
+2026-05-30 20:46:52,015 INFO codeshift.llm | llm response tokens in=754 out=537 total=1291 chars=847
+2026-05-30 20:46:52,018 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_nm83fb_c/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpvit4i70u/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_nm83fb_c
+I0530 20:46:52.021544 1644513 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:52,620 INFO codeshift.sandbox.hardened | hardened sandbox result passed=5 failed=0 errors=0 collected=5 timed_out=False duration=0.60s
+2026-05-30 20:46:52,621 INFO codeshift.loop | iter=1 case=legacy_io_handler passed=5 failed=0 errors=0 collected=5 tokens_total=1291 retry=False action=ran_tests result=best
+2026-05-30 20:46:52,621 INFO codeshift.loop | iter=1 case=legacy_io_handler action=DONE all_tests_pass
+2026-05-30 20:46:52,621 INFO codeshift.loop | loop end case=legacy_io_handler status=OK iters=1 tokens=1291 best_iter=1 best_passed=5
+2026-05-30 20:46:52,621 INFO codeshift.benchmark | benchmark case=legacy_io_handler status=PASS migration=OK iters=1 tokens=1291 oracle=5/5 duration=3.2s
+2026-05-30 20:46:52,622 INFO codeshift.benchmark | benchmark case=long_integer starting source=source_py2.py
+2026-05-30 20:46:52,623 INFO codeshift.loop | loop start case=long_integer source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_tbdw7t2i
+2026-05-30 20:46:52,625 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/long_integer/source_py2.py findings=4 semantic=2 parse_errors=0
+2026-05-30 20:46:52,625 INFO codeshift.loop | iter=0 case=long_integer analyzer findings=4 semantic=2 action=baseline_loaded
+2026-05-30 20:46:52,625 INFO codeshift.tools | transform_code mode=initial user_chars=1504
+2026-05-30 20:46:52,625 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1504
+2026-05-30 20:46:55,663 INFO codeshift.llm | llm response tokens in=611 out=503 total=1114 chars=317
+2026-05-30 20:46:55,665 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_tbdw7t2i/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp003gaq6q/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_tbdw7t2i
+I0530 20:46:55.669156 1644610 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:46:56,250 INFO codeshift.sandbox.hardened | hardened sandbox result passed=8 failed=0 errors=0 collected=8 timed_out=False duration=0.58s
+2026-05-30 20:46:56,251 INFO codeshift.loop | iter=1 case=long_integer passed=8 failed=0 errors=0 collected=8 tokens_total=1114 retry=False action=ran_tests result=best
+2026-05-30 20:46:56,251 INFO codeshift.loop | iter=1 case=long_integer action=DONE all_tests_pass
+2026-05-30 20:46:56,251 INFO codeshift.loop | loop end case=long_integer status=OK iters=1 tokens=1114 best_iter=1 best_passed=8
+2026-05-30 20:46:56,251 INFO codeshift.benchmark | benchmark case=long_integer status=PASS migration=OK iters=1 tokens=1114 oracle=8/8 duration=3.6s
+2026-05-30 20:46:56,251 INFO codeshift.benchmark | benchmark case=map_iterator starting source=source_py2.py
+2026-05-30 20:46:56,253 INFO codeshift.loop | loop start case=map_iterator source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_m27p47pu
+2026-05-30 20:46:56,257 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/map_iterator/source_py2.py findings=1 semantic=1 parse_errors=0
+2026-05-30 20:46:56,257 INFO codeshift.loop | iter=0 case=map_iterator analyzer findings=1 semantic=1 action=baseline_loaded
+2026-05-30 20:46:56,257 INFO codeshift.tools | transform_code mode=initial user_chars=2209
+2026-05-30 20:46:56,257 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2209
+2026-05-30 20:47:02,466 INFO codeshift.llm | llm response tokens in=766 out=1410 total=2176 chars=1279
+2026-05-30 20:47:02,468 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_m27p47pu/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpl0tpt0o5/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_m27p47pu
+I0530 20:47:02.472548 1644664 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:03,042 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.57s
+2026-05-30 20:47:03,043 INFO codeshift.loop | iter=1 case=map_iterator passed=7 failed=0 errors=0 collected=7 tokens_total=2176 retry=False action=ran_tests result=best
+2026-05-30 20:47:03,043 INFO codeshift.loop | iter=1 case=map_iterator action=DONE all_tests_pass
+2026-05-30 20:47:03,043 INFO codeshift.loop | loop end case=map_iterator status=OK iters=1 tokens=2176 best_iter=1 best_passed=7
+2026-05-30 20:47:03,043 INFO codeshift.benchmark | benchmark case=map_iterator status=PASS migration=OK iters=1 tokens=2176 oracle=7/7 duration=6.8s
+2026-05-30 20:47:03,043 INFO codeshift.benchmark | benchmark case=metaclass_declaration starting source=source_py2.py
+2026-05-30 20:47:03,046 INFO codeshift.loop | loop start case=metaclass_declaration source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ets1d8g1
+2026-05-30 20:47:03,049 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/metaclass_declaration/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 20:47:03,049 INFO codeshift.loop | iter=0 case=metaclass_declaration analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 20:47:03,049 INFO codeshift.tools | transform_code mode=initial user_chars=1134
+2026-05-30 20:47:03,049 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1134
+2026-05-30 20:47:06,950 INFO codeshift.llm | llm response tokens in=467 out=768 total=1235 chars=510
+2026-05-30 20:47:06,952 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ets1d8g1/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpv_v6bwkl/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ets1d8g1
+I0530 20:47:06.955185 1644746 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:07,520 INFO codeshift.sandbox.hardened | hardened sandbox result passed=5 failed=0 errors=0 collected=5 timed_out=False duration=0.57s
+2026-05-30 20:47:07,520 INFO codeshift.loop | iter=1 case=metaclass_declaration passed=5 failed=0 errors=0 collected=5 tokens_total=1235 retry=False action=ran_tests result=best
+2026-05-30 20:47:07,520 INFO codeshift.loop | iter=1 case=metaclass_declaration action=DONE all_tests_pass
+2026-05-30 20:47:07,521 INFO codeshift.loop | loop end case=metaclass_declaration status=OK iters=1 tokens=1235 best_iter=1 best_passed=5
+2026-05-30 20:47:07,521 INFO codeshift.benchmark | benchmark case=metaclass_declaration status=PASS migration=OK iters=1 tokens=1235 oracle=5/5 duration=4.5s
+2026-05-30 20:47:07,521 INFO codeshift.benchmark | benchmark case=octal_literal starting source=source_py2.py
+2026-05-30 20:47:07,523 INFO codeshift.loop | loop start case=octal_literal source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_gcqzkca9
+2026-05-30 20:47:07,526 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/octal_literal/source_py2.py findings=7 semantic=0 parse_errors=0
+2026-05-30 20:47:07,526 INFO codeshift.loop | iter=0 case=octal_literal analyzer findings=7 semantic=0 action=baseline_loaded
+2026-05-30 20:47:07,526 INFO codeshift.tools | transform_code mode=initial user_chars=1656
+2026-05-30 20:47:07,526 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1656
+2026-05-30 20:47:10,054 INFO codeshift.llm | llm response tokens in=747 out=543 total=1290 chars=494
+2026-05-30 20:47:10,057 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_gcqzkca9/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpelcn0_ai/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_gcqzkca9
+I0530 20:47:10.062039 1644784 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:10,631 INFO codeshift.sandbox.hardened | hardened sandbox result passed=8 failed=0 errors=0 collected=8 timed_out=False duration=0.57s
+2026-05-30 20:47:10,631 INFO codeshift.loop | iter=1 case=octal_literal passed=8 failed=0 errors=0 collected=8 tokens_total=1290 retry=False action=ran_tests result=best
+2026-05-30 20:47:10,631 INFO codeshift.loop | iter=1 case=octal_literal action=DONE all_tests_pass
+2026-05-30 20:47:10,631 INFO codeshift.loop | loop end case=octal_literal status=OK iters=1 tokens=1290 best_iter=1 best_passed=8
+2026-05-30 20:47:10,632 INFO codeshift.benchmark | benchmark case=octal_literal status=PASS migration=OK iters=1 tokens=1290 oracle=8/8 duration=3.1s
+2026-05-30 20:47:10,632 INFO codeshift.benchmark | benchmark case=print_function starting source=source_py2.py
+2026-05-30 20:47:10,633 INFO codeshift.loop | loop start case=print_function source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_iuzipm6g
+2026-05-30 20:47:10,636 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/print_function/source_py2.py findings=6 semantic=0 parse_errors=0
+2026-05-30 20:47:10,636 INFO codeshift.loop | iter=0 case=print_function analyzer findings=6 semantic=0 action=baseline_loaded
+2026-05-30 20:47:10,636 INFO codeshift.tools | transform_code mode=initial user_chars=1446
+2026-05-30 20:47:10,636 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1446
+2026-05-30 20:47:12,768 INFO codeshift.llm | llm response tokens in=591 out=442 total=1033 chars=413
+2026-05-30 20:47:12,770 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_iuzipm6g/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpcway7r1e/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_iuzipm6g
+I0530 20:47:12.773793 1644821 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:13,330 INFO codeshift.sandbox.hardened | hardened sandbox result passed=5 failed=0 errors=0 collected=5 timed_out=False duration=0.56s
+2026-05-30 20:47:13,331 INFO codeshift.loop | iter=1 case=print_function passed=5 failed=0 errors=0 collected=5 tokens_total=1033 retry=False action=ran_tests result=best
+2026-05-30 20:47:13,331 INFO codeshift.loop | iter=1 case=print_function action=DONE all_tests_pass
+2026-05-30 20:47:13,331 INFO codeshift.loop | loop end case=print_function status=OK iters=1 tokens=1033 best_iter=1 best_passed=5
+2026-05-30 20:47:13,331 INFO codeshift.benchmark | benchmark case=print_function status=PASS migration=OK iters=1 tokens=1033 oracle=5/5 duration=2.7s
+2026-05-30 20:47:13,331 INFO codeshift.benchmark | benchmark case=priority_task starting source=source_py2.py
+2026-05-30 20:47:13,333 INFO codeshift.loop | loop start case=priority_task source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_t_ozynx4
+2026-05-30 20:47:13,338 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/priority_task/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 20:47:13,338 INFO codeshift.loop | iter=0 case=priority_task analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 20:47:13,338 INFO codeshift.tools | transform_code mode=initial user_chars=1791
+2026-05-30 20:47:13,338 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1791
+2026-05-30 20:47:22,913 INFO codeshift.llm | llm response tokens in=668 out=2298 total=2966 chars=1659
+2026-05-30 20:47:22,916 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_t_ozynx4/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpxh8cmq6j/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_t_ozynx4
+I0530 20:47:22.920783 1644939 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:23,528 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.61s
+2026-05-30 20:47:23,529 INFO codeshift.loop | iter=1 case=priority_task passed=6 failed=0 errors=0 collected=6 tokens_total=2966 retry=False action=ran_tests result=best
+2026-05-30 20:47:23,529 INFO codeshift.loop | iter=1 case=priority_task action=DONE all_tests_pass
+2026-05-30 20:47:23,529 INFO codeshift.loop | loop end case=priority_task status=OK iters=1 tokens=2966 best_iter=1 best_passed=6
+2026-05-30 20:47:23,529 INFO codeshift.benchmark | benchmark case=priority_task status=PASS migration=OK iters=1 tokens=2966 oracle=6/6 duration=10.2s
+2026-05-30 20:47:23,529 INFO codeshift.benchmark | benchmark case=raise_comma_syntax starting source=source_py2.py
+2026-05-30 20:47:23,530 INFO codeshift.loop | loop start case=raise_comma_syntax source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_5fmiyfwn
+2026-05-30 20:47:23,533 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/raise_comma_syntax/source_py2.py findings=3 semantic=0 parse_errors=0
+2026-05-30 20:47:23,533 INFO codeshift.loop | iter=0 case=raise_comma_syntax analyzer findings=3 semantic=0 action=baseline_loaded
+2026-05-30 20:47:23,533 INFO codeshift.tools | transform_code mode=initial user_chars=1375
+2026-05-30 20:47:23,533 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1375
+2026-05-30 20:47:25,238 INFO codeshift.llm | llm response tokens in=539 out=335 total=874 chars=477
+2026-05-30 20:47:25,240 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_5fmiyfwn/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp_ltmx6dc/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_5fmiyfwn
+I0530 20:47:25.244408 1644984 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:25,794 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.55s
+2026-05-30 20:47:25,795 INFO codeshift.loop | iter=1 case=raise_comma_syntax passed=7 failed=0 errors=0 collected=7 tokens_total=874 retry=False action=ran_tests result=best
+2026-05-30 20:47:25,795 INFO codeshift.loop | iter=1 case=raise_comma_syntax action=DONE all_tests_pass
+2026-05-30 20:47:25,795 INFO codeshift.loop | loop end case=raise_comma_syntax status=OK iters=1 tokens=874 best_iter=1 best_passed=7
+2026-05-30 20:47:25,795 INFO codeshift.benchmark | benchmark case=raise_comma_syntax status=PASS migration=OK iters=1 tokens=874 oracle=7/7 duration=2.3s
+2026-05-30 20:47:25,796 INFO codeshift.benchmark | benchmark case=raw_input_call starting source=source_py2.py
+2026-05-30 20:47:25,797 INFO codeshift.loop | loop start case=raw_input_call source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_dx6x7lxm
+2026-05-30 20:47:25,800 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/raw_input_call/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 20:47:25,800 INFO codeshift.loop | iter=0 case=raw_input_call analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 20:47:25,800 INFO codeshift.tools | transform_code mode=initial user_chars=1483
+2026-05-30 20:47:25,800 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1483
+2026-05-30 20:47:27,666 INFO codeshift.llm | llm response tokens in=584 out=371 total=955 chars=352
+2026-05-30 20:47:27,668 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_dx6x7lxm/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp8gqi228q/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_dx6x7lxm
+I0530 20:47:27.672232 1645045 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:28,217 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.55s
+2026-05-30 20:47:28,218 INFO codeshift.loop | iter=1 case=raw_input_call passed=6 failed=0 errors=0 collected=6 tokens_total=955 retry=False action=ran_tests result=best
+2026-05-30 20:47:28,218 INFO codeshift.loop | iter=1 case=raw_input_call action=DONE all_tests_pass
+2026-05-30 20:47:28,218 INFO codeshift.loop | loop end case=raw_input_call status=OK iters=1 tokens=955 best_iter=1 best_passed=6
+2026-05-30 20:47:28,218 INFO codeshift.benchmark | benchmark case=raw_input_call status=PASS migration=OK iters=1 tokens=955 oracle=6/6 duration=2.4s
+2026-05-30 20:47:28,218 INFO codeshift.benchmark | benchmark case=reduce_builtin starting source=source_py2.py
+2026-05-30 20:47:28,220 INFO codeshift.loop | loop start case=reduce_builtin source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_jrx7woqe
+2026-05-30 20:47:28,222 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/reduce_builtin/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 20:47:28,222 INFO codeshift.loop | iter=0 case=reduce_builtin analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 20:47:28,222 INFO codeshift.tools | transform_code mode=initial user_chars=1455
+2026-05-30 20:47:28,222 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1455
+2026-05-30 20:47:29,551 INFO codeshift.llm | llm response tokens in=572 out=197 total=769 chars=265
+2026-05-30 20:47:29,554 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_jrx7woqe/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpuxh1gqfw/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_jrx7woqe
+I0530 20:47:29.556917 1645072 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:30,900 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=1.34s
+2026-05-30 20:47:30,902 INFO codeshift.loop | iter=1 case=reduce_builtin passed=7 failed=0 errors=0 collected=7 tokens_total=769 retry=False action=ran_tests result=best
+2026-05-30 20:47:30,902 INFO codeshift.loop | iter=1 case=reduce_builtin action=DONE all_tests_pass
+2026-05-30 20:47:30,902 INFO codeshift.loop | loop end case=reduce_builtin status=OK iters=1 tokens=769 best_iter=1 best_passed=7
+2026-05-30 20:47:30,903 INFO codeshift.benchmark | benchmark case=reduce_builtin status=PASS migration=OK iters=1 tokens=769 oracle=7/7 duration=2.7s
+2026-05-30 20:47:30,903 INFO codeshift.benchmark | benchmark case=report_builder starting source=source_py2.py
+2026-05-30 20:47:30,906 INFO codeshift.loop | loop start case=report_builder source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_57r_lx3e
+2026-05-30 20:47:30,918 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/report_builder/source_py2.py findings=5 semantic=5 parse_errors=0
+2026-05-30 20:47:30,918 INFO codeshift.loop | iter=0 case=report_builder analyzer findings=5 semantic=5 action=baseline_loaded
+2026-05-30 20:47:30,918 INFO codeshift.tools | transform_code mode=initial user_chars=2692
+2026-05-30 20:47:30,918 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2692
+2026-05-30 20:47:34,976 INFO codeshift.llm | llm response tokens in=904 out=867 total=1771 chars=580
+2026-05-30 20:47:34,980 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_57r_lx3e/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpgck7kf1y/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_57r_lx3e
+I0530 20:47:34.985628 1645293 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:35,575 INFO codeshift.sandbox.hardened | hardened sandbox result passed=4 failed=2 errors=0 collected=6 timed_out=False duration=0.59s
+2026-05-30 20:47:35,575 INFO codeshift.loop | iter=1 case=report_builder passed=4 failed=2 errors=0 collected=6 tokens_total=1771 retry=False action=ran_tests result=best
+2026-05-30 20:47:35,576 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=3439
+2026-05-30 20:47:35,576 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=3439
+2026-05-30 20:47:39,051 INFO codeshift.llm | llm response tokens in=1237 out=746 total=1983 chars=581
+2026-05-30 20:47:39,054 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_57r_lx3e/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpgtggnd8_/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_57r_lx3e
+I0530 20:47:39.058193 1645396 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:39,696 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.64s
+2026-05-30 20:47:39,698 INFO codeshift.loop | iter=2 case=report_builder passed=6 failed=0 errors=0 collected=6 tokens_total=3754 retry=False action=ran_tests result=best
+2026-05-30 20:47:39,698 INFO codeshift.loop | iter=2 case=report_builder action=DONE all_tests_pass
+2026-05-30 20:47:39,699 INFO codeshift.loop | loop end case=report_builder status=OK iters=2 tokens=3754 best_iter=2 best_passed=6
+2026-05-30 20:47:39,699 INFO codeshift.benchmark | benchmark case=report_builder status=PASS migration=OK iters=2 tokens=3754 oracle=6/6 duration=8.8s
+2026-05-30 20:47:39,699 INFO codeshift.benchmark | benchmark case=sliding_average starting source=source_py2.py
+2026-05-30 20:47:39,700 INFO codeshift.loop | loop start case=sliding_average source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_nxeg5zvf
+2026-05-30 20:47:39,703 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/sliding_average/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 20:47:39,703 INFO codeshift.loop | iter=0 case=sliding_average analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 20:47:39,703 INFO codeshift.tools | transform_code mode=initial user_chars=1568
+2026-05-30 20:47:39,703 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1568
+2026-05-30 20:47:43,889 INFO codeshift.llm | llm response tokens in=566 out=817 total=1383 chars=348
+2026-05-30 20:47:43,890 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_nxeg5zvf/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmppswnmojj/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_nxeg5zvf
+I0530 20:47:43.894089 1645495 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:44,577 INFO codeshift.sandbox.hardened | hardened sandbox result passed=1 failed=2 errors=0 collected=3 timed_out=False duration=0.69s
+2026-05-30 20:47:44,578 INFO codeshift.loop | iter=1 case=sliding_average passed=1 failed=2 errors=0 collected=3 tokens_total=1383 retry=False action=ran_tests result=best
+2026-05-30 20:47:44,578 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=2520
+2026-05-30 20:47:44,578 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2520
+2026-05-30 20:47:50,379 INFO codeshift.llm | llm response tokens in=1009 out=1125 total=2134 chars=350
+2026-05-30 20:47:50,381 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_nxeg5zvf/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp5bo5k8b2/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_nxeg5zvf
+I0530 20:47:50.385089 1645627 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 20:47:50,963 INFO codeshift.sandbox.hardened | hardened sandbox result passed=3 failed=0 errors=0 collected=3 timed_out=False duration=0.58s
+2026-05-30 20:47:50,964 INFO codeshift.loop | iter=2 case=sliding_average passed=3 failed=0 errors=0 collected=3 tokens_total=3517 retry=False action=ran_tests result=best
+2026-05-30 20:47:50,964 INFO codeshift.loop | iter=2 case=sliding_average action=DONE all_tests_pass
+2026-05-30 20:47:50,964 INFO codeshift.loop | loop end case=sliding_average status=OK iters=2 tokens=3517 best_iter=2 best_passed=3
+2026-05-30 20:47:50,964 INFO codeshift.benchmark | benchmark case=sliding_average status=PASS migration=OK iters=2 tokens=3517 oracle=3/3 duration=11.3s
+2026-05-30 20:47:50,964 INFO codeshift.benchmark | benchmark case=str_bytes starting source=source_py2.py
+2026-05-30 20:47:50,966 INFO codeshift.loop | loop start case=str_bytes source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_h2okth74
+2026-05-30 20:47:50,971 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/str_bytes/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 20:47:50,971 INFO codeshift.loop | iter=0 case=str_bytes analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 20:47:50,971 INFO codeshift.tools | transform_code mode=initial user_chars=2165
+2026-05-30 20:47:50,971 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2165
+2026-05-30 20:48:01,861 INFO codeshift.llm | llm response tokens in=812 out=2474 total=3286 chars=1519
+2026-05-30 20:48:01,864 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_h2okth74/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpr8ju5ytb/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_h2okth74
+I0530 20:48:01.867668 1645732 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:04:10,181 INFO codeshift.benchmark | benchmark runner model=gemini-2.5-flash
+2026-05-30 21:04:10,888 INFO codeshift.llm | GeminiClient initialised model=gemini-2.5-flash temperature=0.0 max_tokens=4096
+2026-05-30 21:04:10,888 INFO codeshift.benchmark | benchmark start cases=11 sandbox=HardenedSubprocessSandbox
+2026-05-30 21:04:10,888 INFO codeshift.benchmark | benchmark case=str_bytes starting source=source_py2.py
+2026-05-30 21:04:10,890 INFO codeshift.loop | loop start case=str_bytes source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ogmmn_je
+2026-05-30 21:04:10,933 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/str_bytes/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 21:04:10,934 INFO codeshift.loop | iter=0 case=str_bytes analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 21:04:10,934 INFO codeshift.tools | transform_code mode=initial user_chars=2165
+2026-05-30 21:04:10,934 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2165
+2026-05-30 21:04:23,499 INFO codeshift.llm | llm response tokens in=812 out=2534 total=3346 chars=2010
+2026-05-30 21:04:23,501 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ogmmn_je/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpoxtvjah3/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ogmmn_je
+I0530 21:04:23.507170 1656885 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:04:24,286 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.78s
+2026-05-30 21:04:24,287 INFO codeshift.loop | iter=1 case=str_bytes passed=7 failed=0 errors=0 collected=7 tokens_total=3346 retry=False action=ran_tests result=best
+2026-05-30 21:04:24,287 INFO codeshift.loop | iter=1 case=str_bytes action=DONE all_tests_pass
+2026-05-30 21:04:24,287 INFO codeshift.loop | loop end case=str_bytes status=OK iters=1 tokens=3346 best_iter=1 best_passed=7
+2026-05-30 21:04:24,287 INFO codeshift.benchmark | benchmark case=str_bytes status=PASS migration=OK iters=1 tokens=3346 oracle=7/7 duration=13.4s
+2026-05-30 21:04:24,287 INFO codeshift.benchmark | benchmark case=string_module_attrs starting source=source_py2.py
+2026-05-30 21:04:24,289 INFO codeshift.loop | loop start case=string_module_attrs source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_bnj0ke83
+2026-05-30 21:04:24,291 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/string_module_attrs/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 21:04:24,291 INFO codeshift.loop | iter=0 case=string_module_attrs analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 21:04:24,291 INFO codeshift.tools | transform_code mode=initial user_chars=987
+2026-05-30 21:04:24,292 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=987
+2026-05-30 21:04:27,451 INFO codeshift.llm | llm response tokens in=443 out=569 total=1012 chars=389
+2026-05-30 21:04:27,454 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_bnj0ke83/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpqzesewlf/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_bnj0ke83
+I0530 21:04:27.458067 1656924 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:04:28,085 INFO codeshift.sandbox.hardened | hardened sandbox result passed=5 failed=1 errors=0 collected=6 timed_out=False duration=0.63s
+2026-05-30 21:04:28,086 INFO codeshift.loop | iter=1 case=string_module_attrs passed=5 failed=1 errors=0 collected=6 tokens_total=1012 retry=False action=ran_tests result=best
+2026-05-30 21:04:28,086 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=1639
+2026-05-30 21:04:28,086 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1639
+2026-05-30 21:04:33,299 INFO codeshift.llm | llm response tokens in=690 out=1147 total=1837 chars=401
+2026-05-30 21:04:33,301 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_bnj0ke83/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpmctnfld_/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_bnj0ke83
+I0530 21:04:33.306632 1656988 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:04:33,923 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.62s
+2026-05-30 21:04:33,923 INFO codeshift.loop | iter=2 case=string_module_attrs passed=6 failed=0 errors=0 collected=6 tokens_total=2849 retry=False action=ran_tests result=best
+2026-05-30 21:04:33,923 INFO codeshift.loop | iter=2 case=string_module_attrs action=DONE all_tests_pass
+2026-05-30 21:04:33,923 INFO codeshift.loop | loop end case=string_module_attrs status=OK iters=2 tokens=2849 best_iter=2 best_passed=6
+2026-05-30 21:04:33,924 INFO codeshift.benchmark | benchmark case=string_module_attrs status=PASS migration=OK iters=2 tokens=2849 oracle=6/6 duration=9.6s
+2026-05-30 21:04:33,924 INFO codeshift.benchmark | benchmark case=success_rate starting source=source_py2.py
+2026-05-30 21:04:33,925 INFO codeshift.loop | loop start case=success_rate source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_548wbpha
+2026-05-30 21:04:33,927 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/success_rate/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 21:04:33,928 INFO codeshift.loop | iter=0 case=success_rate analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 21:04:33,928 INFO codeshift.tools | transform_code mode=initial user_chars=1484
+2026-05-30 21:04:33,928 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1484
+2026-05-30 21:04:37,157 INFO codeshift.llm | llm response tokens in=555 out=576 total=1131 chars=245
+2026-05-30 21:04:37,159 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_548wbpha/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp_k9l5e96/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_548wbpha
+I0530 21:04:37.164294 1657034 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:04:37,796 INFO codeshift.sandbox.hardened | hardened sandbox result passed=0 failed=3 errors=0 collected=3 timed_out=False duration=0.64s
+2026-05-30 21:04:37,796 INFO codeshift.loop | iter=1 case=success_rate passed=0 failed=3 errors=0 collected=3 tokens_total=1131 retry=False action=ran_tests result=best
+2026-05-30 21:04:37,796 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=2418
+2026-05-30 21:04:37,796 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2418
+2026-05-30 21:04:42,683 INFO codeshift.llm | llm response tokens in=1028 out=1070 total=2098 chars=248
+2026-05-30 21:04:42,685 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_548wbpha/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpfhfazn4g/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_548wbpha
+I0530 21:04:42.689850 1657118 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:04:43,294 INFO codeshift.sandbox.hardened | hardened sandbox result passed=3 failed=0 errors=0 collected=3 timed_out=False duration=0.61s
+2026-05-30 21:04:43,294 INFO codeshift.loop | iter=2 case=success_rate passed=3 failed=0 errors=0 collected=3 tokens_total=3229 retry=False action=ran_tests result=best
+2026-05-30 21:04:43,295 INFO codeshift.loop | iter=2 case=success_rate action=DONE all_tests_pass
+2026-05-30 21:04:43,295 INFO codeshift.loop | loop end case=success_rate status=OK iters=2 tokens=3229 best_iter=2 best_passed=3
+2026-05-30 21:04:43,296 INFO codeshift.benchmark | benchmark case=success_rate status=PASS migration=OK iters=2 tokens=3229 oracle=3/3 duration=9.4s
+2026-05-30 21:04:43,296 INFO codeshift.benchmark | benchmark case=text_encoding starting source=source_py2.py
+2026-05-30 21:04:43,298 INFO codeshift.loop | loop start case=text_encoding source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_am1uihig
+2026-05-30 21:04:43,302 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/text_encoding/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 21:04:43,302 INFO codeshift.loop | iter=0 case=text_encoding analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 21:04:43,302 INFO codeshift.tools | transform_code mode=initial user_chars=2367
+2026-05-30 21:04:43,302 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2367
+2026-05-30 21:04:55,484 INFO codeshift.llm | llm response tokens in=836 out=2702 total=3538 chars=1323
+2026-05-30 21:04:55,487 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_am1uihig/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpmbzd3_nb/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_am1uihig
+I0530 21:04:55.492305 1657208 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:04:56,222 INFO codeshift.sandbox.hardened | hardened sandbox result passed=12 failed=0 errors=0 collected=12 timed_out=False duration=0.73s
+2026-05-30 21:04:56,222 INFO codeshift.loop | iter=1 case=text_encoding passed=12 failed=0 errors=0 collected=12 tokens_total=3538 retry=False action=ran_tests result=best
+2026-05-30 21:04:56,222 INFO codeshift.loop | iter=1 case=text_encoding action=DONE all_tests_pass
+2026-05-30 21:04:56,223 INFO codeshift.loop | loop end case=text_encoding status=OK iters=1 tokens=3538 best_iter=1 best_passed=12
+2026-05-30 21:04:56,223 INFO codeshift.benchmark | benchmark case=text_encoding status=PASS migration=OK iters=1 tokens=3538 oracle=12/12 duration=12.9s
+2026-05-30 21:04:56,223 INFO codeshift.benchmark | benchmark case=unicode_codec_pipeline starting source=source_py2.py
+2026-05-30 21:04:56,224 INFO codeshift.loop | loop start case=unicode_codec_pipeline source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_llj7n8l4
+2026-05-30 21:04:56,228 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/unicode_codec_pipeline/source_py2.py findings=3 semantic=2 parse_errors=0
+2026-05-30 21:04:56,228 INFO codeshift.loop | iter=0 case=unicode_codec_pipeline analyzer findings=3 semantic=2 action=baseline_loaded
+2026-05-30 21:04:56,228 INFO codeshift.tools | transform_code mode=initial user_chars=1493
+2026-05-30 21:04:56,228 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1493
+2026-05-30 21:05:04,032 INFO codeshift.llm | llm response tokens in=589 out=1707 total=2296 chars=491
+2026-05-30 21:05:04,034 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_llj7n8l4/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp29nvcuhr/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_llj7n8l4
+I0530 21:05:04.038775 1657264 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:05:04,757 INFO codeshift.sandbox.hardened | hardened sandbox result passed=8 failed=0 errors=0 collected=8 timed_out=False duration=0.72s
+2026-05-30 21:05:04,757 INFO codeshift.loop | iter=1 case=unicode_codec_pipeline passed=8 failed=0 errors=0 collected=8 tokens_total=2296 retry=False action=ran_tests result=best
+2026-05-30 21:05:04,757 INFO codeshift.loop | iter=1 case=unicode_codec_pipeline action=DONE all_tests_pass
+2026-05-30 21:05:04,758 INFO codeshift.loop | loop end case=unicode_codec_pipeline status=OK iters=1 tokens=2296 best_iter=1 best_passed=8
+2026-05-30 21:05:04,758 INFO codeshift.benchmark | benchmark case=unicode_codec_pipeline status=PASS migration=OK iters=1 tokens=2296 oracle=8/8 duration=8.5s
+2026-05-30 21:05:04,758 INFO codeshift.benchmark | benchmark case=unicode_template_renderer starting source=source_py2.py
+2026-05-30 21:05:04,759 INFO codeshift.loop | loop start case=unicode_template_renderer source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_kv24hquk
+2026-05-30 21:05:04,764 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/unicode_template_renderer/source_py2.py findings=7 semantic=3 parse_errors=0
+2026-05-30 21:05:04,764 INFO codeshift.loop | iter=0 case=unicode_template_renderer analyzer findings=7 semantic=3 action=baseline_loaded
+2026-05-30 21:05:04,764 INFO codeshift.tools | transform_code mode=initial user_chars=2025
+2026-05-30 21:05:04,764 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2025
+2026-05-30 21:05:11,377 INFO codeshift.llm | llm response tokens in=746 out=1341 total=2087 chars=657
+2026-05-30 21:05:11,381 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_kv24hquk/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpnrfa7_sc/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_kv24hquk
+I0530 21:05:11.387022 1657326 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:05:12,028 INFO codeshift.sandbox.hardened | hardened sandbox result passed=9 failed=0 errors=0 collected=9 timed_out=False duration=0.65s
+2026-05-30 21:05:12,028 INFO codeshift.loop | iter=1 case=unicode_template_renderer passed=9 failed=0 errors=0 collected=9 tokens_total=2087 retry=False action=ran_tests result=best
+2026-05-30 21:05:12,028 INFO codeshift.loop | iter=1 case=unicode_template_renderer action=DONE all_tests_pass
+2026-05-30 21:05:12,029 INFO codeshift.loop | loop end case=unicode_template_renderer status=OK iters=1 tokens=2087 best_iter=1 best_passed=9
+2026-05-30 21:05:12,029 INFO codeshift.benchmark | benchmark case=unicode_template_renderer status=PASS migration=OK iters=1 tokens=2087 oracle=9/9 duration=7.3s
+2026-05-30 21:05:12,029 INFO codeshift.benchmark | benchmark case=validation_chain starting source=source_py2.py
+2026-05-30 21:05:12,030 INFO codeshift.loop | loop start case=validation_chain source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_u6ro9ngp
+2026-05-30 21:05:12,035 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/validation_chain/source_py2.py findings=2 semantic=0 parse_errors=0
+2026-05-30 21:05:12,035 INFO codeshift.loop | iter=0 case=validation_chain analyzer findings=2 semantic=0 action=baseline_loaded
+2026-05-30 21:05:12,035 INFO codeshift.tools | transform_code mode=initial user_chars=1676
+2026-05-30 21:05:12,035 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1676
+2026-05-30 21:05:14,117 INFO codeshift.llm | llm response tokens in=618 out=340 total=958 chars=934
+2026-05-30 21:05:14,120 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_u6ro9ngp/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpaam0h39p/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_u6ro9ngp
+I0530 21:05:14.126152 1657370 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:05:14,779 INFO codeshift.sandbox.hardened | hardened sandbox result passed=4 failed=2 errors=0 collected=6 timed_out=False duration=0.66s
+2026-05-30 21:05:14,780 INFO codeshift.loop | iter=1 case=validation_chain passed=4 failed=2 errors=0 collected=6 tokens_total=958 retry=False action=ran_tests result=best
+2026-05-30 21:05:14,780 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=3924
+2026-05-30 21:05:14,780 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=3924
+2026-05-30 21:05:18,990 INFO codeshift.llm | llm response tokens in=1256 out=886 total=2142 chars=954
+2026-05-30 21:05:18,993 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_u6ro9ngp/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpbzqizm8r/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_u6ro9ngp
+I0530 21:05:19.001856 1657420 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:05:19,631 INFO codeshift.sandbox.hardened | hardened sandbox result passed=4 failed=2 errors=0 collected=6 timed_out=False duration=0.64s
+2026-05-30 21:05:19,632 INFO codeshift.loop | iter=2 case=validation_chain passed=4 failed=2 errors=0 collected=6 tokens_total=3100 retry=False action=ran_tests result=no_improve
+2026-05-30 21:05:19,632 INFO codeshift.tools | transform_code mode=repair iter=3 user_chars=3944
+2026-05-30 21:05:19,632 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=3944
+2026-05-30 21:05:38,688 INFO codeshift.llm | llm response tokens in=1260 out=4092 total=5352 chars=632
+2026-05-30 21:05:38,689 WARNING codeshift.tools | transform_code parse failed on first try: SyntaxError: '(' was never closed at line 30, col 30 - retrying
+2026-05-30 21:05:38,690 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=4226
+2026-05-30 21:05:55,652 INFO codeshift.llm | llm response tokens in=1333 out=3680 total=5013 chars=954
+2026-05-30 21:05:55,653 WARNING codeshift.loop | iter=3 case=validation_chain action=oscillation_break identical_to_iter=2 - stopping early
+2026-05-30 21:05:55,654 INFO codeshift.loop | loop end case=validation_chain status=OSCILLATION iters=2 tokens=13465 best_iter=1 best_passed=4
+2026-05-30 21:05:55,654 INFO codeshift.benchmark | benchmark case=validation_chain status=FAIL migration=OSCILLATION iters=2 tokens=13465 oracle=4/6 duration=43.6s
+2026-05-30 21:05:55,654 INFO codeshift.benchmark | benchmark case=version_sort starting source=source_py2.py
+2026-05-30 21:05:55,656 INFO codeshift.loop | loop start case=version_sort source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_qmd0nmlt
+2026-05-30 21:05:55,665 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/version_sort/source_py2.py findings=10 semantic=10 parse_errors=0
+2026-05-30 21:05:55,666 INFO codeshift.loop | iter=0 case=version_sort analyzer findings=10 semantic=10 action=baseline_loaded
+2026-05-30 21:05:55,666 INFO codeshift.tools | transform_code mode=initial user_chars=2970
+2026-05-30 21:05:55,666 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2970
+2026-05-30 21:06:08,517 INFO codeshift.llm | llm response tokens in=1044 out=2902 total=3946 chars=1699
+2026-05-30 21:06:08,519 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_qmd0nmlt/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmp6gvoe18k/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_qmd0nmlt
+I0530 21:06:08.523611 1657726 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:06:09,289 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.77s
+2026-05-30 21:06:09,289 INFO codeshift.loop | iter=1 case=version_sort passed=7 failed=0 errors=0 collected=7 tokens_total=3946 retry=False action=ran_tests result=best
+2026-05-30 21:06:09,289 INFO codeshift.loop | iter=1 case=version_sort action=DONE all_tests_pass
+2026-05-30 21:06:09,290 INFO codeshift.loop | loop end case=version_sort status=OK iters=1 tokens=3946 best_iter=1 best_passed=7
+2026-05-30 21:06:09,290 INFO codeshift.benchmark | benchmark case=version_sort status=PASS migration=OK iters=1 tokens=3946 oracle=7/7 duration=13.6s
+2026-05-30 21:06:09,290 INFO codeshift.benchmark | benchmark case=xrange_iteration starting source=source_py2.py
+2026-05-30 21:06:09,291 INFO codeshift.loop | loop start case=xrange_iteration source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_eifovzmz
+2026-05-30 21:06:09,294 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/xrange_iteration/source_py2.py findings=3 semantic=3 parse_errors=0
+2026-05-30 21:06:09,294 INFO codeshift.loop | iter=0 case=xrange_iteration analyzer findings=3 semantic=3 action=baseline_loaded
+2026-05-30 21:06:09,294 INFO codeshift.tools | transform_code mode=initial user_chars=1449
+2026-05-30 21:06:09,295 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1449
+2026-05-30 21:06:12,904 INFO codeshift.llm | llm response tokens in=581 out=647 total=1228 chars=365
+2026-05-30 21:06:12,906 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_eifovzmz/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpk32wuuf2/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_eifovzmz
+I0530 21:06:12.909604 1657769 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:06:13,522 INFO codeshift.sandbox.hardened | hardened sandbox result passed=7 failed=0 errors=0 collected=7 timed_out=False duration=0.62s
+2026-05-30 21:06:13,523 INFO codeshift.loop | iter=1 case=xrange_iteration passed=7 failed=0 errors=0 collected=7 tokens_total=1228 retry=False action=ran_tests result=best
+2026-05-30 21:06:13,523 INFO codeshift.loop | iter=1 case=xrange_iteration action=DONE all_tests_pass
+2026-05-30 21:06:13,523 INFO codeshift.loop | loop end case=xrange_iteration status=OK iters=1 tokens=1228 best_iter=1 best_passed=7
+2026-05-30 21:06:13,523 INFO codeshift.benchmark | benchmark case=xrange_iteration status=PASS migration=OK iters=1 tokens=1228 oracle=7/7 duration=4.2s
+2026-05-30 21:06:13,523 INFO codeshift.benchmark | benchmark case=zip_exhaustion starting source=source_py2.py
+2026-05-30 21:06:13,525 INFO codeshift.loop | loop start case=zip_exhaustion source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ykhgida6
+2026-05-30 21:06:13,529 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/zip_exhaustion/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 21:06:13,529 INFO codeshift.loop | iter=0 case=zip_exhaustion analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 21:06:13,530 INFO codeshift.tools | transform_code mode=initial user_chars=1233
+2026-05-30 21:06:13,530 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1233
+2026-05-30 21:06:26,083 INFO codeshift.llm | llm response tokens in=531 out=2822 total=3353 chars=881
+2026-05-30 21:06:26,091 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ykhgida6/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpcnrp032k/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ykhgida6
+I0530 21:06:26.094669 1658310 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:06:26,907 INFO codeshift.sandbox.hardened | hardened sandbox result passed=4 failed=1 errors=0 collected=5 timed_out=False duration=0.82s
+2026-05-30 21:06:26,908 INFO codeshift.loop | iter=1 case=zip_exhaustion passed=4 failed=1 errors=0 collected=5 tokens_total=3353 retry=False action=ran_tests result=best
+2026-05-30 21:06:26,908 INFO codeshift.tools | transform_code mode=repair iter=2 user_chars=2004
+2026-05-30 21:06:26,908 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=2004
+2026-05-30 21:06:37,556 INFO codeshift.llm | llm response tokens in=769 out=2297 total=3066 chars=1055
+2026-05-30 21:06:37,563 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ykhgida6/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpesv61nps/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ykhgida6
+I0530 21:06:37.567040 1658691 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:06:38,329 INFO codeshift.sandbox.hardened | hardened sandbox result passed=5 failed=0 errors=0 collected=5 timed_out=False duration=0.77s
+2026-05-30 21:06:38,330 INFO codeshift.loop | iter=2 case=zip_exhaustion passed=5 failed=0 errors=0 collected=5 tokens_total=6419 retry=False action=ran_tests result=best
+2026-05-30 21:06:38,330 INFO codeshift.loop | iter=2 case=zip_exhaustion action=DONE all_tests_pass
+2026-05-30 21:06:38,330 INFO codeshift.loop | loop end case=zip_exhaustion status=OK iters=2 tokens=6419 best_iter=2 best_passed=5
+2026-05-30 21:06:38,330 INFO codeshift.benchmark | benchmark case=zip_exhaustion status=PASS migration=OK iters=2 tokens=6419 oracle=5/5 duration=24.8s
+2026-05-30 21:06:38,330 INFO codeshift.benchmark | benchmark case=zip_pad starting source=source_py2.py
+2026-05-30 21:06:38,332 INFO codeshift.loop | loop start case=zip_pad source=source_py2.py test=test_behavior.py work_dir=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ep_rt4sa
+2026-05-30 21:06:38,337 INFO codeshift.analyzer | analyzed path=/Users/majesticgk/CodeShift/benchmark/cases/zip_pad/source_py2.py findings=0 semantic=0 parse_errors=0
+2026-05-30 21:06:38,337 INFO codeshift.loop | iter=0 case=zip_pad analyzer findings=0 semantic=0 action=baseline_loaded
+2026-05-30 21:06:38,337 INFO codeshift.tools | transform_code mode=initial user_chars=1072
+2026-05-30 21:06:38,337 INFO codeshift.llm | llm invoke model=gemini-2.5-flash sys_chars=723 user_chars=1072
+2026-05-30 21:06:44,040 INFO codeshift.llm | llm response tokens in=487 out=1167 total=1654 chars=500
+2026-05-30 21:06:44,042 INFO codeshift.sandbox.hardened | hardened sandbox cmd timeout=30s mem_cap=2048MiB: /Users/majesticgk/CodeShift/.venv/bin/python -B -m pytest /var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ep_rt4sa/test_behavior.py -v --tb=short --no-header -p no:cacheprovider --junitxml=/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/tmpuno82540/junit.xml --rootdir /private/var/folders/53/dxw0tzdx09s9vcrlczqxnb1w0000gn/T/codeshift_work_ep_rt4sa
+I0530 21:06:44.052261 1658759 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(7, generation: 1)
+2026-05-30 21:06:44,802 INFO codeshift.sandbox.hardened | hardened sandbox result passed=6 failed=0 errors=0 collected=6 timed_out=False duration=0.76s
+2026-05-30 21:06:44,803 INFO codeshift.loop | iter=1 case=zip_pad passed=6 failed=0 errors=0 collected=6 tokens_total=1654 retry=False action=ran_tests result=best
+2026-05-30 21:06:44,803 INFO codeshift.loop | iter=1 case=zip_pad action=DONE all_tests_pass
+2026-05-30 21:06:44,803 INFO codeshift.loop | loop end case=zip_pad status=OK iters=1 tokens=1654 best_iter=1 best_passed=6
+2026-05-30 21:06:44,803 INFO codeshift.benchmark | benchmark case=zip_pad status=PASS migration=OK iters=1 tokens=1654 oracle=6/6 duration=6.5s
+2026-05-30 21:06:44,804 INFO codeshift.benchmark | benchmark complete total=11 passed=10 pass_rate=90.9%
+══════════════════════════════════════════════════════════════════════════
+ CodeShift Benchmark  ·  model: gemini-2.5-flash  ·  2026-05-30
+══════════════════════════════════════════════════════════════════════════
+ CASE                     STATUS   ITERS  TOKENS   ORACLE     TIME
+──────────────────────────────────────────────────────────────────────────
+ str_bytes                PASS         1    3346      7/7    13.4s
+ string_module_attrs      PASS         2    2849      6/6     9.6s
+ success_rate             PASS         2    3229      3/3     9.4s
+ text_encoding            PASS         1    3538    12/12    12.9s
+ unicode_codec_pipeline   PASS         1    2296      8/8     8.5s
+ unicode_template_renderer PASS         1    2087      9/9     7.3s
+ validation_chain         FAIL         2   13465      4/6    43.6s
+ version_sort             PASS         1    3946      7/7    13.6s
+ xrange_iteration         PASS         1    1228      7/7     4.2s
+ zip_exhaustion           PASS         2    6419      5/5    24.8s
+ zip_pad                  PASS         1    1654      6/6     6.5s
+──────────────────────────────────────────────────────────────────────────
+ TOTAL: 11 cases  ·  10 PASS  ·  1 FAIL  ·  pass rate: 90.9%
+══════════════════════════════════════════════════════════════════════════
+
+ BAND                                   CASES  PASS    RATE
+──────────────────────────────────────────────────────────────────────────
+ Clean / mechanical                         3     3  100.0%
+ Group A — Undecidable from source          5     5  100.0%
+ Group B — Decidable, high-miss-risk        3     2   66.7%
+──────────────────────────────────────────────────────────────────────────
+══════════════════════════════════════════════════════════════════════════
+
+FAILURES (1)
+──────────────────────────────────────────────────────────────────────────
+ validation_chain
+   migration : OSCILLATION
+   root cause: [FAILURE] test_validate_age_bad_int_clean_error | AssertionError: Exception context not suppressed — add 'from None' to the re-raise | assert ValueError("invalid literal for int() with base 10: 'abc'") is None |  +  where ValueError("invalid literal for int() with base 10: 'abc'"
+
+══════════════════════════════════════════════════════════════════════════

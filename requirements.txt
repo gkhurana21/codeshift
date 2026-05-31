@@ -1,0 +1,23 @@
+# Core analysis
+# NOTE: parso 0.8+ dropped the Python 2.7 grammar. 0.7.1 is the last release
+# that ships grammar27.txt. Do NOT bump this without re-validating Py2 parsing.
+parso==0.7.1
+
+# Agent orchestration (used in Phase 2)
+langchain==0.3.*
+langchain-anthropic==0.3.*
+anthropic>=0.40.0
+
+# Optional second backend: Google Gemini (free tier available).
+# The provider router in agent.llm dispatches model strings prefixed
+# `gemini-` to this backend; `claude-` strings still go to Anthropic.
+langchain-google-genai==2.1.*
+
+# Validation / schema
+pydantic>=2.6,<3
+
+# Test runner (Phase 2/3)
+pytest>=8.0,<9
+
+# Env / secrets
+python-dotenv>=1.0
