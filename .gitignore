@@ -21,3 +21,7 @@ out/
 
 # Benchmark run logs — machine-generated, contain local paths, not source
 benchmark_run_*.txt
+
+# local Claude Code and graphify setup, not part of the project
+CLAUDE.md
+.claude/
