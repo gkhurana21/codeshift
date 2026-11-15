@@ -49,9 +49,6 @@ python -m benchmark.run_all --model claude-sonnet-4-6
 
 # Specific cases only:
 python -m benchmark.run_all --cases error_translator,validation_chain
-
-# Dry-run to list discovered cases without running:
-python -m benchmark.run_all --list
 ```
 
 **One run, report verbatim.** The benchmark is a measurement tool, not a
@@ -66,18 +63,18 @@ This verifies the oracle is actually testing the right thing, not passing
 trivially.
 
 ```bash
-# Run the bite-check against all cases:
-python -m benchmark.run_all --bite-check
+# All cases (no API keys, about a minute):
+python -m benchmark.bite_check
 
-# Or manually for a single case:
-python -m pytest benchmark/cases/my_new_case/test_behavior.py \
-    --override-ini="python_files=test_*.py" \
-    # source_py2.py must be in the same dir — unmigrated
+# Just yours:
+python -m benchmark.bite_check --cases my_new_case
 ```
 
-The bite-check passes when all oracles *fail* (SyntaxError, NameError,
-AssertionError, etc.). A passing oracle on unmigrated source means the test
-does not exercise the trap and must be rewritten.
+Each case runs in its own temp directory against its unmigrated
+`source_py2.py`. The check passes when every oracle *fails* there
+(SyntaxError, NameError, AssertionError, etc.) and prints the first error per
+case. An oracle that passes on unmigrated source does not exercise its trap
+and must be rewritten. CI runs this on every push.
 
 ---
 
@@ -170,12 +167,11 @@ file, is there a single correct answer?* Yes → `group_b`. No → `group_a`.
 ### 6. Bite-check before submitting
 
 ```bash
-# Must print FAILURES (not passes) for your new case:
-pytest benchmark/cases/my_new_case/test_behavior.py -v
-# (run against unmigrated source — the source_py2.py in the case dir)
+python -m benchmark.bite_check --cases my_new_case
 ```
 
-All assertions must fail. If any pass, the oracle is not testing the trap.
+Your case must show `BITES yes`. If it shows `NO`, the oracle passes on
+unmigrated code and is not testing the trap.
 
 ### 7. PR checklist
 

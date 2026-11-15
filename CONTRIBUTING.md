@@ -56,9 +56,8 @@ Every oracle in `benchmark/cases/` must **fail** on its unmigrated
 the trap rather than passing trivially.
 
 ```bash
-# Run a single case bite-check:
-pytest benchmark/cases/my_new_case/test_behavior.py -v
-# Expected: all FAILED (not passed)
+python -m benchmark.bite_check --cases my_new_case   # must show BITES yes
+python -m benchmark.bite_check                       # all 41 cases
 ```
 
 CI runs this automatically on every PR. A passing oracle = a broken oracle.
@@ -90,7 +89,7 @@ Short version:
 1. Create `benchmark/cases/{name}/source_py2.py` and `test_behavior.py`
 2. Every oracle assertion must **fail** on the unmigrated source (bite-check)
 3. Add `"{name}": "band"` to `benchmark/metadata.py`
-4. Run `pytest benchmark/cases/{name}/test_behavior.py -v` — all FAILED = good
+4. Run `python -m benchmark.bite_check --cases {name}`: it must show `BITES yes`
 
 ---
 
@@ -125,17 +124,12 @@ New to the project? These are well-scoped starting points:
 - **Add a `str_bytes` variant without documenting docstrings** — the current
   `str_bytes` case passes partly because its docstrings explicitly describe
   byte semantics. A variant with no such hints would measure raw F1 competence.
-  See Known Limitation L1 in the README.
+  See Known Limitation L1 in [docs/METHODOLOGY.md](docs/METHODOLOGY.md).
 
-- **Automate the bite-check as a standalone script** — `benchmark/run_all.py`
-  supports `--bite-check` as a conceptual flag but doesn't implement it yet.
-  Add it: run all oracles against their unmigrated sources, assert all fail,
-  exit 0 only if the check is clean.
-
-- **Add an F4 case (`map(None, ...)` zip-pad idiom)** — the pre-registered
-  failure category F4 has no benchmark case yet. The correct Py3 equivalent
-  is `itertools.zip_longest`. See `benchmark/README.md` → Pre-registered
-  failure taxonomy.
+- **Add a third model backend** — `build_llm_client()` in `agent/llm.py`
+  dispatches on the model-name prefix (`claude-*`, `gemini-*`). Adding one
+  more provider (an OpenAI or open-weights model) and running the 41 cases
+  once would test whether the shared F6 miss holds beyond n=2.
 
 ---
 
