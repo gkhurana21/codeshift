@@ -1,95 +1,178 @@
+<div align="center">
+
 # CodeShift
 
-[![CI](https://github.com/gkhurana21/codeshift/actions/workflows/test.yml/badge.svg)](https://github.com/gkhurana21/codeshift/actions/workflows/test.yml)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+### An LLM agent that ports Python 2 code to Python 3, then proves the port still behaves the same.
 
-**An LLM agent that migrates Python 2 code to Python 3 and verifies behavioral correctness — not just syntax — against a 41-case behavioral oracle benchmark. 95.1% pass rate, byte-identical across two LLM providers.**
+*Claude and Gemini both passed the same 39 of 41 cases and failed the same two.*
 
-A *behavioral oracle* is a hand-authored test file that encodes what the Py2 program actually returned (values, exception types, side effects), so a migration only passes if it preserves runtime behavior — not merely if it parses under Python 3.
+<br/>
 
-Unlike `2to3`-style tools that rewrite syntax and stop, CodeShift runs the migrated code against these oracles, catches semantic regressions (silent integer-division changes, `str`/`bytes` boundary breaks, exception-context leaks), and feeds failures back into a repair loop until the migration passes or budgets are exhausted.
+[![Try it](https://img.shields.io/badge/Try%20it-no%20API%20key-00C853?style=for-the-badge&logo=gnubash&logoColor=white)](#-try-it-no-api-key)
+[![Results](https://img.shields.io/badge/Results-41%20cases-111111?style=for-the-badge&logo=pytest&logoColor=white)](#-the-finding)
+[![Portfolio](https://img.shields.io/badge/Portfolio-gaurangkhurana.ca-111111?style=for-the-badge&logo=About.me&logoColor=white)](https://gaurangkhurana.ca)
 
-## How the agent loop works
+<br/>
 
-```
-analyze ──> transform ──> write to sandbox ──> run oracle tests
-                ^                                    │
-                │            pass ── done            │
-                └── repair prompt (last 1-2 ── fail ─┘
-                    tracebacks only)
-```
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-repair%20loop-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
+![Claude](https://img.shields.io/badge/Claude-Sonnet%204.6-D97757?style=flat-square&logo=anthropic&logoColor=white)
+![Gemini](https://img.shields.io/badge/Gemini-2.5%20Flash-4285F4?style=flat-square&logo=googlegemini&logoColor=white)
+[![CI](https://img.shields.io/github/actions/workflow/status/gkhurana21/codeshift/test.yml?branch=main&style=flat-square&label=CI)](https://github.com/gkhurana21/codeshift/actions/workflows/test.yml)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 
-1. **Analyze.** A [parso](https://github.com/davidhalter/parso)-based static analyzer parses the source with the Py2.7 grammar (parso is error-tolerant, so files with Py2-only syntax still yield a tree) and emits findings — mechanical rewrites tagged separately from semantic-risk constructs.
-2. **Transform.** The LLM receives the source plus the analyzer findings and produces a Py3 candidate.
-3. **Verify.** The candidate runs against the case's behavioral oracle in a sandboxed subprocess (process-group kill on timeout, `RLIMIT_AS` memory cap for benchmark runs).
-4. **Repair.** On failure, the agent gets a repair prompt carrying only the most recent 1–2 tracebacks and tries again.
+[The problem](#the-problem) • [How it works](#-how-it-works) • [The finding](#-the-finding) • [Try it](#-try-it-no-api-key) • [Under the hood](#-under-the-hood)
 
-Guards on the loop: identical-code **oscillation detection**, **best-attempt tracking** (most tests passed wins, ties to earliest), and per-run **token and iteration budgets**. Every iteration logs a greppable `iter=N case=NAME passed=P failed=F action=...` line.
+</div>
 
-**LLM backends:** `claude-*` → Anthropic API, `gemini-*` → Google Gemini, dispatched by model-name prefix via `build_llm_client()`.
+---
 
-## Benchmark results
+## The problem
 
-41 hand-authored cases, each targeting one distinct semantic trap, grouped into pre-registered difficulty bands. The failure categories were written down **before** the corpus run, so the two failures land in a predicted class rather than being explained after the fact.
+Tools like `2to3` fix syntax. But a lot of Python 2 code still runs on Python 3 and quietly returns different
+answers. `7 / 2` was `3` and is now `3.5`. A `str` used to be bytes. A re-raised exception now drags the old one
+along with it. Nothing crashes. The numbers are just wrong.
+
+## The fix
+
+**CodeShift checks what the migrated code *does*, not just whether it parses.** Every case comes with hand-written
+tests that pin down what the Python 2 program actually returned. The agent migrates the file, runs those tests in a
+sandbox, reads the failures and repairs, until the tests pass or the budget runs out.
+
+<table>
+<tr>
+<td align="center" width="25%"><h3>95.1%</h3><sub>39 of 41 cases passed, on both models</sub></td>
+<td align="center" width="25%"><h3>41 / 41</h3><sub>oracles proven to fail on unmigrated code, checked in CI</sub></td>
+<td align="center" width="25%"><h3>Identical</h3><sub>pass/fail on every case across Anthropic and Google</sub></td>
+<td align="center" width="25%"><h3>55%</h3><sub>of Gemini's tokens for Claude to reach the same score</sub></td>
+</tr>
+</table>
+
+## 🔁 How it works
+
+<table>
+<tr>
+<td width="50%"><b>1. Analyze.</b> A <a href="https://github.com/davidhalter/parso">parso</a> static analyzer reads the file with the Python 2.7 grammar and flags every Py2 construct, keeping mechanical rewrites apart from the risky ones (division, <code>str</code>/<code>bytes</code>, exceptions).</td>
+<td width="50%"><b>2. Transform.</b> The model gets the source plus those findings and writes a Python 3 version. Claude or Gemini, picked by the model name.</td>
+</tr>
+<tr>
+<td><b>3. Verify.</b> The new code runs against its behavioral tests in a sandboxed subprocess with a timeout and a memory cap. Passing means it returns what Python 2 returned.</td>
+<td><b>4. Repair.</b> On a failure the model sees only the latest one or two tracebacks and tries again. It stops on repeated code, keeps the best attempt, and respects token and iteration budgets.</td>
+</tr>
+</table>
+
+## 🎯 The finding
+
+41 cases, each built around one Python 2 to 3 trap. The categories the agent should struggle with were written down
+**before** any model ran, so the failures landed where they were predicted, not explained afterwards.
 
 | Band | Cases | Gemini 2.5 Flash | Claude Sonnet 4.6 |
 |---|---:|---:|---:|
-| Clean / mechanical | 21 | 21/21 | 21/21 |
-| Group A — Undecidable from source | 12 | 12/12 | 12/12 |
-| Group B — Decidable, high-miss-risk | 6 | 4/6 | 4/6 |
-| Multi-trap | 2 | 2/2 | 2/2 |
-| **Overall** | **41** | **39/41 = 95.1%** | **39/41 = 95.1%** |
-| Total tokens | | 122,748 | 67,527 |
+| Mechanical | 21 | 21/21 | 21/21 |
+| Ambiguous from the source alone | 12 | 12/12 | 12/12 |
+| Has one right answer, easy to miss | 6 | 4/6 | 4/6 |
+| Several traps in one file | 2 | 2/2 | 2/2 |
+| **Overall** | **41** | **39/41** | **39/41** |
+| Tokens used | | 122,748 | 67,527 |
 
-Two models from different providers, a capability tier apart, produce **byte-identical pass/fail on all 41 cases** — including the same two failures: both agents convert `except E, e:` correctly but fail to add `raise ... from None`, leaving the caught exception attached as `__context__`. A shared gap across providers suggests it may be a property of LLM exception-semantic reasoning, though n=2 models is suggestive, not conclusive. Secondary finding: Claude reaches the same score at roughly 55% of Gemini's token cost.
+Two models from different companies got the same pass or fail on **every one of the 41 cases**. Both missed the
+same thing in both failures:
 
-Full methodology, pre-registered failure categories, known limitations, and per-case results: [docs/METHODOLOGY.md](docs/METHODOLOGY.md). Corpus design and oracle integrity rules: [benchmark/README.md](benchmark/README.md).
+```python
+# what both models wrote
+except KeyError as e:
+    raise AppError('missing config key: ' + str(e))
 
-## Quickstart
+# what keeps Python 2's behavior
+except KeyError as e:
+    raise AppError('missing config key: ' + str(e)) from None
+```
+
+Both fixed the old `except KeyError, e:` syntax. Neither added `from None`, so the original `KeyError` stays attached
+to the new error as `__context__`, which Python 2 never did. Repair loops on both models got stuck on the same
+answer. With two models that's a strong hint, not proof, that this is a blind spot of LLMs in general rather than of
+one model.
+
+## ⚡ Try it (no API key)
 
 ```bash
-git clone https://github.com/gkhurana21/codeshift.git
-cd codeshift
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env   # add ANTHROPIC_API_KEY or GEMINI_API_KEY (Gemini free tier works)
+git clone https://github.com/gkhurana21/codeshift.git && cd codeshift
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python -m scripts.demo_migration_scripted
 ```
 
-Migrate a single file:
+A scripted model drives the real loop, sandbox and tests. Its first try leaves a `/` where Python 2 meant floor
+division, a test catches it, and the repair goes from 5/6 to 6/6 passing.
+
+## 🔧 Under the hood
+
+<details>
+<summary><b>The loop, the benchmark, how to run the real thing, and the engineering</b></summary>
+
+### The loop
+
+```mermaid
+flowchart LR
+  SRC["Py2 source"] --> AN["analyzer<br/>parso 0.7.1, Py2.7 grammar"]
+  AN --> TR["transform<br/>Claude or Gemini"]
+  TR --> SB["sandbox<br/>timeout + memory cap"]
+  SB --> OR{"behavioral<br/>tests pass?"}
+  OR -- yes --> DONE["done"]
+  OR -- no --> RP["repair prompt<br/>last 1-2 tracebacks"]
+  RP --> TR
+  RP -. "same code twice" .-> STOP["stop, keep best attempt"]
+```
+
+* **Oscillation guard.** If a repair produces code identical to an earlier attempt, the loop stops instead of spending tokens going in circles.
+* **Best attempt wins.** The attempt with the most tests passing is kept, ties go to the earliest.
+* **Budgets.** Every run has a token cap and an iteration cap. Each iteration logs one greppable line: `iter=N case=NAME passed=P failed=F action=...`.
+* **One router.** `build_llm_client()` sends `claude-*` to Anthropic and `gemini-*` to Google. Quota errors stop a benchmark run cleanly instead of burning retries.
+
+### The benchmark
+
+* **Behavioral oracles.** Each case is a `source_py2.py` and a `test_behavior.py` that asserts what Python 2 returned: values, exception types, side effects.
+* **Bite-checked.** Every oracle must *fail* on its own unmigrated source, or it isn't testing anything. `python -m benchmark.bite_check` proves it for all 41, and CI runs it on every push.
+* **Honest bands.** In the "ambiguous" band a pass only means the model matched the one reading the test pins down, not that it recovered the author's intent. `csv_field_builder` is a known coin flip.
+* **One run, reported as is.** Each model ran the 41 cases once. No re-rolls to improve a number.
+
+Full methodology, the pre-registered categories, per-case results and known limitations are in
+[docs/METHODOLOGY.md](docs/METHODOLOGY.md). Writing a new case is covered in [benchmark/README.md](benchmark/README.md).
+
+### Run the real thing
 
 ```bash
-python -m agent.migrate samples/gnarly_py2.py
+cp .env.example .env    # add GEMINI_API_KEY (free tier works) or ANTHROPIC_API_KEY
+
+# Migrate one file with a real model
+.venv/bin/python -m agent.migrate samples/migration_demo/source_py2.py --model gemini-2.5-flash
+
+# The full 41-case benchmark
+.venv/bin/python -m benchmark.run_all --model gemini-2.5-flash
+.venv/bin/python -m benchmark.run_all --model claude-sonnet-4-6
+
+# No keys needed
+.venv/bin/python -m pytest tests/           # unit tests
+.venv/bin/python -m benchmark.bite_check    # every oracle fails on unmigrated code
 ```
 
-Run the full 41-case benchmark:
+### Engineering
 
-```bash
-CODESHIFT_MODEL=gemini-2.5-flash python -m benchmark.run_all   # free tier
-python -m benchmark.run_all --model claude-sonnet-4-6          # canonical run
-```
+* **94 unit tests** run offline with a scripted `FakeChatModel`, so CI needs no API keys. CI runs them and the bite-check on Python 3.11, 3.12 and 3.13.
+* **Hardened sandbox** for benchmark runs: process-group kill on timeout, `RLIMIT_AS` memory cap, and guards against stale `.pyc` files.
+* **parso is pinned to 0.7.1** on purpose. It's the last release that ships the Python 2.7 grammar.
 
-Run the unit test suite (no API keys needed):
-
-```bash
-pytest tests/
-```
-
-## Architecture
+### Layout
 
 ```
-analyzer/      parso-based static analyzer — detects Py2 constructs, tags
-               semantic-risk items distinctly from mechanical rewrites
-agent/         LangChain repair loop — transform, test, repair; oscillation
-               detection, best-attempt tracking, token/iteration budgets
-sandbox/       Subprocess runners: LocalSubprocessSandbox (dev) and
-               HardenedSubprocessSandbox (benchmark: process-group kill,
-               RLIMIT_AS cap, .pyc-staleness guards)
-benchmark/     41-case corpus + runner. Each case: source_py2.py +
-               test_behavior.py (the behavioral oracle)
-docs/          Full methodology, pre-registered categories, results
+analyzer/     parso static analyzer: Py2 constructs, mechanical vs semantic risk
+agent/        repair loop, prompts, LLM router (Claude, Gemini)
+sandbox/      subprocess runners: local (dev) and hardened (benchmark)
+benchmark/    41 cases, the runner, the bite-check
+docs/         full methodology and results
 ```
+
+</details>
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
