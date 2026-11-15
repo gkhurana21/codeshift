@@ -763,20 +763,30 @@ def detect_sorted_cmp_kwarg(tree: Module) -> List[Finding]:
 # --- 13. token-level fallback for `<>` ---------------------------------------
 
 def detect_ne_operator(source: str) -> List[Finding]:
-    """`<>` inequality operator - parso 0.7 rejects it, so use tokens."""
+    """`<>` inequality operator - parso 0.7 rejects it, so use tokens.
+
+    The stdlib tokenizer reports `<>` differently across versions: up to 3.11
+    it yields two adjacent OP tokens `<` and `>`; from 3.12 tokenize runs on
+    the C tokenizer, which yields a single OP token `<>` (NOTEQUAL). Accept
+    both. Newer tokenizers can also raise SyntaxError on Py2-only input, so
+    that falls back to the regex scan too.
+    """
     out: List[Finding] = []
     try:
         tokens = list(tokenize.generate_tokens(io.StringIO(source).readline))
-    except (tokenize.TokenizeError, IndentationError):
-        # Fall through to a simple regex if tokenizing fails.
+    except (tokenize.TokenError, SyntaxError):  # IndentationError is a SyntaxError
         return _regex_ne(source)
-    for i in range(len(tokens) - 1):
-        t1, t2 = tokens[i], tokens[i + 1]
-        if (
-            t1.type == tokenize.OP and t1.string == "<"
+    for i, t1 in enumerate(tokens):
+        if t1.type != tokenize.OP:
+            continue
+        single = t1.string == "<>"
+        t2 = tokens[i + 1] if i + 1 < len(tokens) else None
+        pair = (
+            t1.string == "<" and t2 is not None
             and t2.type == tokenize.OP and t2.string == ">"
             and t1.end == t2.start  # immediately adjacent
-        ):
+        )
+        if single or pair:
             line, col = t1.start
             out.append(Finding(
                 line=line, column=col,

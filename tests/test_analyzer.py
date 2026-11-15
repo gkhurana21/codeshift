@@ -129,6 +129,37 @@ def test_ne_inside_string_not_flagged():
     assert "ne_operator" not in types(r)
 
 
+def test_ne_operator_as_single_token(monkeypatch):
+    """Python 3.12+ tokenizes `<>` as one OP token, not `<` then `>`."""
+    import tokenize
+    from analyzer import detectors
+
+    real = tokenize.generate_tokens
+
+    def merged(readline):
+        toks, out, i = list(real(readline)), [], 0
+        while i < len(toks):
+            a = toks[i]
+            b = toks[i + 1] if i + 1 < len(toks) else None
+            if a.string == "<" and b is not None and b.string == ">" and a.end == b.start:
+                out.append(tokenize.TokenInfo(tokenize.OP, "<>", a.start, b.end, a.line))
+                i += 2
+            else:
+                out.append(a)
+                i += 1
+        return iter(out)
+
+    monkeypatch.setattr(detectors.tokenize, "generate_tokens", merged)
+    found = detectors.detect_ne_operator("if 1 <> 2:\n    pass\n")
+    assert [(f.line, f.column) for f in found] == [(1, 5)]
+
+
+def test_ne_operator_when_tokenizer_gives_up():
+    """An unclosed bracket stops the tokenizer; the regex fallback still finds `<>`."""
+    r = analyze_source("x = (1 <> 2\n")
+    assert "ne_operator" in types(r)
+
+
 # --- Numeric literals --------------------------------------------------------
 
 def test_old_octal_flagged():

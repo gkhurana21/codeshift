@@ -157,7 +157,7 @@ cp .env.example .env    # add GEMINI_API_KEY (free tier works) or ANTHROPIC_API_
 
 ### Engineering
 
-* **94 unit tests** run offline with a scripted `FakeChatModel`, so CI needs no API keys. CI runs them and the bite-check on Python 3.11, 3.12 and 3.13.
+* **96 unit tests** run offline with a scripted `FakeChatModel`, so CI needs no API keys. CI runs them and the bite-check on Python 3.11, 3.12 and 3.13.
 * **Hardened sandbox** for benchmark runs: process-group kill on timeout, `RLIMIT_AS` memory cap, and guards against stale `.pyc` files.
 * **parso is pinned to 0.7.1** on purpose. It's the last release that ships the Python 2.7 grammar.
 
