@@ -322,10 +322,10 @@ oracles.
 **What still stands:** the other 39 cases and both models' results on them,
 the bite-check (41/41 oracles fail on unmigrated source), and the token
 comparison. **What doesn't:** "the failures are F6 agent limitations" and the
-cross-model "shared gap" claim. **Next:** fix the two oracles to check that
-the context is suppressed (`__suppress_context__`), then run all 41 cases once
-per model and report that next to this result. The original text below is
-kept as written, with notes pointing here.
+cross-model "shared gap" claim. **Done since:** the two oracles were fixed and
+Claude was rerun on all 41 cases; see *Rerun with fixed F6 oracles* at the end
+of this file. The original text below is kept as written, with notes pointing
+here.
 
 ### Gemini iteration run (starter corpus) — 2026-05-28 (NOT the reportable number)
 
@@ -498,7 +498,9 @@ Run command:
 .venv/bin/python -m benchmark.run_all --model claude-sonnet-4-6
 ```
 
-Total tokens: 67,527 across 41 cases.
+Total tokens: 59,807 across 41 cases. *(Corrected 2026-11-16. This said 67,527,
+an arithmetic error: the per-case table below and every LLM call in the run log
+both sum to 59,807.)*
 
 **Methodology note — llm.py mid-session modification.** `agent/llm.py` was
 patched between the Gemini run and the Claude run to add `load_dotenv(override=True)`
@@ -642,7 +644,7 @@ Both `except ..., e:` clauses converted correctly; neither re-raise uses
 | Group B — Decidable hard | 4/6 = 66.7% | 4/6 = 66.7% |
 | Multi-trap | 2/2 = 100% | 2/2 = 100% |
 | Failures | error_translator, validation_chain | error_translator, validation_chain |
-| Total tokens | 122,748 | 67,527 |
+| Total tokens | 122,748 | 59,807 (was misstated as 67,527) |
 
 The two models end with the same pass/fail on all 41 cases. That was first
 read as a shared blind spot on `raise ... from None`; that reading is withdrawn
@@ -655,5 +657,75 @@ feedback, Gemini needed repairs on `bandwidth_estimator` and `sliding_average`,
 which Claude passed first try, and Claude needed a repair on `frame_buffer`,
 which Gemini passed first try.
 
-Claude reaches the same score at roughly 55% of Gemini's token cost (67K vs
-123K tokens across 41 cases).
+Claude reaches the same score at about 49% of Gemini's token cost (60K vs 123K
+tokens across 41 cases). *(Corrected 2026-11-16 from "roughly 55%", which used
+the misstated 67,527.)*
+
+---
+
+### Rerun with fixed F6 oracles — 2026-11-16
+
+**Oracle fix** (commit `0f52671`). Both F6 oracles now check the behavior F6
+was registered for: printing the re-raised error must not also print the
+caught one (no "During handling of the above exception" and no "The above
+exception was the direct cause"), as in Python 2. Before any model run, the
+fixed oracles were checked against five versions of each source:
+
+| Version | `error_translator` | `validation_chain` |
+|---|---:|---:|
+| Unmigrated Py2 | SyntaxError | SyntaxError |
+| Naive (`except E as e:`, plain re-raise) | 3/6 | 4/6 |
+| `raise ... from e` | 3/6 | 4/6 |
+| `raise ... from None` | **6/6** | **6/6** |
+| Raise after the `except` block ends | **6/6** | **6/6** |
+
+The bite-check stayed at 41/41. No other case, oracle, prompt, model setting
+or loop setting changed. The analyzer fix of 2026-11-15 (`<>` detection) doesn't
+touch any case: no source uses `<>`, and the analyzer findings and first-prompt
+sizes in the run log are identical to May for all 41 cases.
+
+**Claude Sonnet 4.6, all 41 cases, one run** (same command as May):
+
+| Band | Cases | Nov 2026 | May 2026 |
+|---|---:|---:|---:|
+| Clean / mechanical | 21 | 20/21 | 21/21 |
+| Group A — Undecidable from source | 12 | 12/12 | 12/12 |
+| Group B — Decidable, high-miss-risk | 6 | **6/6** | 4/6 |
+| Multi-trap | 2 | 2/2 | 2/2 |
+| **Overall** | **41** | **40/41 = 97.6%** | 39/41 = 95.1% |
+| Tokens (every LLM call) | | 55,517 | 59,807 |
+
+Only three cases changed:
+
+- `error_translator`: FAIL 3/6 → **PASS 6/6** in 2 iterations. Attempt 1 was
+  the naive port (3/6); the repair passed. Response sizes 531 then 561
+  characters, the same as May.
+- `validation_chain`: FAIL 4/6 → **PASS 6/6** in 2 iterations. Response sizes
+  934 then 954, the same as May.
+- `zip_exhaustion`: PASS → **FAIL 4/5** (`TRANSFORM_ERROR`). Attempt 1 passed
+  4/5; attempt 2 made the test file fail to load (a collection error); attempt
+  3 came back as something
+  that isn't valid Python ("invalid syntax at line 1, col 3"), and so did the
+  one corrective retry, which ends the loop. In May the same case also needed
+  a corrective retry at attempt 2, which succeeded. This is a genuine miss in
+  this run, reported as is. The raw response isn't saved, so what it
+  contained can't be checked.
+
+The other 38 cases have the same status and iteration count as in May.
+
+**Harness gaps this run exposed** (not changed, so the numbers stay comparable):
+
+- One unparseable response, after its corrective retry, ends the whole loop
+  even with iterations left.
+- The cleanup step strips code fences and a single leading prose line;
+  other prose before the code gets through and fails to parse.
+- Raw model responses aren't saved per iteration. That is what hid the May
+  F6 repairs: only the best attempt survives the run.
+- The loop's token count skips calls whose output failed to parse (2,206
+  tokens on `zip_exhaustion` here), so totals above count every LLM call
+  from the log instead.
+
+**Gemini 2.5 Flash:** not rerun. The run stopped before its first case because
+the project's prepaid API credits are used up (`429 ... prepayment credits are
+depleted`); the quota guard halted it cleanly at 0/41. Its May result above
+still includes the two broken oracles.

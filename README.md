@@ -41,10 +41,10 @@ sandbox, reads the failures and repairs, until the tests pass or the budget runs
 
 <table>
 <tr>
-<td align="center" width="25%"><h3>39 / 41</h3><sub>cases passed by Claude and by Gemini. The other 2 tests have a bug</sub></td>
+<td align="center" width="25%"><h3>40 / 41</h3><sub>cases passed by Claude Sonnet 4.6 on the corrected benchmark</sub></td>
 <td align="center" width="25%"><h3>41 / 41</h3><sub>oracles proven to fail on unmigrated code, checked in CI</sub></td>
 <td align="center" width="25%"><h3>96</h3><sub>unit tests that run offline, no API key needed</sub></td>
-<td align="center" width="25%"><h3>55%</h3><sub>of Gemini's tokens for Claude to reach the same score</sub></td>
+<td align="center" width="25%"><h3>~49%</h3><sub>of Gemini's tokens for Claude on the same 41 cases (May run)</sub></td>
 </tr>
 </table>
 
@@ -66,21 +66,27 @@ sandbox, reads the failures and repairs, until the tests pass or the budget runs
 41 cases, each built around one Python 2 to 3 trap. The categories the agent should struggle with were written down
 **before** any model ran.
 
-| Band | Cases | Gemini 2.5 Flash | Claude Sonnet 4.6 |
-|---|---:|---:|---:|
-| Mechanical | 21 | 21/21 | 21/21 |
-| Ambiguous from the source alone | 12 | 12/12 | 12/12 |
-| Has one right answer, easy to miss | 6 | 4/6 | 4/6 |
-| Several traps in one file | 2 | 2/2 | 2/2 |
-| **Overall** | **41** | **39/41** | **39/41** |
-| Tokens used | | 122,748 | 67,527 |
+| Band | Cases | Claude Sonnet 4.6<br/><sub>Nov 2026, fixed tests</sub> | Claude Sonnet 4.6<br/><sub>May 2026</sub> | Gemini 2.5 Flash<br/><sub>May 2026</sub> |
+|---|---:|---:|---:|---:|
+| Mechanical | 21 | 20/21 | 21/21 | 21/21 |
+| Ambiguous from the source alone | 12 | 12/12 | 12/12 | 12/12 |
+| Has one right answer, easy to miss | 6 | **6/6** | 4/6 | 4/6 |
+| Several traps in one file | 2 | 2/2 | 2/2 | 2/2 |
+| **Overall** | **41** | **40/41** | **39/41** | **39/41** |
+| Tokens used | | 55,517 | 59,807 | 122,748 |
 
-**Known issue: the two failures are a bug in my tests, not in the models.** Both are cases where a migrated `except`
-block should hide the original error with `raise ... from None`. Their tests check `__context__ is None`, but
-`from None` leaves `__context__` set (it sets `__suppress_context__` instead), so no correct migration can pass them.
-Applied by hand, the exact fix the tests ask for scores the same 3/6 and 4/6 the models got. Fixing those two tests
-and re-running both models is next. Until then, read the result as both models passing the 39 cases whose tests
-are sound.
+**What changed.** In May both models missed the same two cases. I first read that as a shared blind spot for
+`raise ... from None`. It was a bug in my tests: they checked `__context__ is None`, but `from None` leaves
+`__context__` set and only hides it, so no correct migration could pass. The fixed tests check what Python 2 users
+would actually see: the re-raised error prints on its own. Before rerunning, I checked them against five versions of
+each file (unmigrated, a naive port, `from e`, `from None` and raising after the `except` block); only the last two
+pass. On the rerun Claude fixed both cases in one repair each, with repairs the same size as its May ones.
+
+**The new miss** is `zip_exhaustion`, which passed in May. Its first attempt passed 4/5, then a later repair came
+back as something that isn't Python twice in a row, which ends the loop. One run per model, reported as is.
+
+**Gemini** hasn't been rerun yet (its prepaid API credits ran out), so its column is still the May run with the two
+broken tests.
 
 ## ⚡ Try it (no API key)
 
