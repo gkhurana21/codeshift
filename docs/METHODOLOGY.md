@@ -218,6 +218,11 @@ the agent to recognise that the context chain will alter string output.
 **Expected prevalence in corpus.** Low. Only affects oracles that assert on
 exception message strings across a re-raise boundary.
 
+> **Note (2026-11-16).** `from None` hides the context; it does not remove it.
+> After `raise X from None`, `__context__` still holds the caught exception and
+> `__suppress_context__` is `True`. The F6 oracles asserted `__context__ is None`,
+> which `from None` can't satisfy. See *Correction* at the top of Results.
+
 ---
 
 ### Corpus Construction Constraint — Dict ordering non-determinism
@@ -286,6 +291,41 @@ The reportable number was produced from the 41-case scaled corpus using
 ---
 
 ## Results
+
+### Correction (2026-11-16): the two F6 failures are an oracle bug
+
+The original analysis below reads both failures (`error_translator`,
+`validation_chain`) as a shared model blind spot: neither model added
+`raise ... from None`. That reading is **withdrawn**. The fault is in the two
+oracles.
+
+- **The oracles can't be passed by the fix they ask for.** They assert
+  `exc.__context__ is None`. But `raise X from None` does not clear
+  `__context__`: Python still records the caught exception there and sets
+  `__suppress_context__ = True` (and `__cause__ = None`) instead. An empty
+  `__context__` takes something else, such as raising after the `except`
+  block ends.
+- **Measured.** Applying exactly that fix by hand (`except E as e:` plus
+  `from None` on every re-raise) scores **3/6** on `error_translator` and
+  **4/6** on `validation_chain`, the same scores both models got.
+- **The models most likely made the fix.** In the run logs the repaired
+  responses grew by the length of ` from None` per re-raise: Claude's
+  `error_translator` went from 531 to 561 characters (+30, three re-raises) and
+  both models' `validation_chain` from 934 to 954 (+20, two re-raises).
+  Gemini's `error_translator` grew by 20. Each repair still failed, so the loop
+  logged no improvement, then stopped on a repeated answer.
+- **The "captured" code was the first attempt.** The loop reports its best
+  attempt and ties go to the earliest, so the code shown in the Claude failure
+  analysis is iteration 1, before the model saw any failing test. It does not
+  show the repair.
+
+**What still stands:** the other 39 cases and both models' results on them,
+the bite-check (41/41 oracles fail on unmigrated source), and the token
+comparison. **What doesn't:** "the failures are F6 agent limitations" and the
+cross-model "shared gap" claim. **Next:** fix the two oracles to check that
+the context is suppressed (`__suppress_context__`), then run all 41 cases once
+per model and report that next to this result. The original text below is
+kept as written, with notes pointing here.
 
 ### Gemini iteration run (starter corpus) — 2026-05-28 (NOT the reportable number)
 
@@ -385,6 +425,9 @@ it reflects a pre-registered difficulty class, not a surprise.
 ```
 
 #### Failure analysis
+
+> **Superseded (2026-11-16).** These two failures come from a bug in the F6
+> oracles, not from the agent. See *Correction* at the top of Results.
 
 Both failures are **pre-registered F6 (Group B — agent-limitation)**. Neither
 is a surprise.
@@ -527,9 +570,15 @@ are valid; the implementation-state difference is noted for completeness.
 
 #### Failure analysis
 
+> **Superseded (2026-11-16).** These two failures come from a bug in the F6
+> oracles, not from the agent. The "captured migrated source" below is the
+> loop's best attempt, which here is iteration 1, before the model saw any
+> failing test; it does not show the repair. See *Correction* at the top of
+> Results.
+
 Same two cases, same category, same root cause as Gemini. See F6 diagnosis in
 the Gemini section above. Both failures confirmed by a capture re-run at
-temperature=0 (see `capture_f6_claude.py`).
+temperature=0 (see `scripts/diagnostics/capture_f6_failures.py`).
 
 **`error_translator` — F6, OSCILLATION, 3/6 oracle**
 
@@ -595,13 +644,16 @@ Both `except ..., e:` clauses converted correctly; neither re-raise uses
 | Failures | error_translator, validation_chain | error_translator, validation_chain |
 | Total tokens | 122,748 | 67,527 |
 
-Byte-identical pass/fail across all 41 cases. The two models that differ by a
-full capability tier agree on every single case — including the two failures.
-The F6 gap (omitting `raise ... from None` on exception re-raises) appears in
-both and is unaffected by repair-loop pressure in either. That this failure is
-shared across two models from different providers suggests it may be a property
-of LLM exception-semantic reasoning rather than any one model — though n=2
-across 2 providers means the claim is suggestive, not conclusive.
+The two models end with the same pass/fail on all 41 cases. That was first
+read as a shared blind spot on `raise ... from None`; that reading is withdrawn
+(see *Correction* at the top of Results). The two shared failures are the two
+F6 cases, whose oracles no correct migration can pass, so matching there says
+nothing about the models.
 
-Secondary finding: Claude achieves the same score at roughly 55% of Gemini's
-token cost (67K vs 123K tokens across 41 cases).
+The match also only holds after repair. On first attempts, before any test
+feedback, Gemini needed repairs on `bandwidth_estimator` and `sliding_average`,
+which Claude passed first try, and Claude needed a repair on `frame_buffer`,
+which Gemini passed first try.
+
+Claude reaches the same score at roughly 55% of Gemini's token cost (67K vs
+123K tokens across 41 cases).

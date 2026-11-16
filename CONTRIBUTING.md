@@ -129,7 +129,7 @@ New to the project? These are well-scoped starting points:
 - **Add a third model backend** — `build_llm_client()` in `agent/llm.py`
   dispatches on the model-name prefix (`claude-*`, `gemini-*`). Adding one
   more provider (an OpenAI or open-weights model) and running the 41 cases
-  once would test whether the shared F6 miss holds beyond n=2.
+  once would give the benchmark a third model to compare.
 
 ---
 

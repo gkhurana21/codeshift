@@ -2,25 +2,23 @@
 
 PURPOSE
 -------
-This is a one-time evidence-capture script, not a regular test runner.
-It re-runs the two benchmark cases that fail due to F6 (missing `from None`
-on exception re-raises) with an explicit work_dir so the migrated source is
-preserved after the run for inspection.
+A one-time evidence-capture script, not a regular test runner. It re-runs the
+two F6 cases (error_translator, validation_chain) with an explicit work_dir so
+the migrated source is kept after the run for inspection. Temperature=0 keeps
+it close to the original benchmark run.
 
-Temperature=0 makes the output deterministic — the result is identical to the
-original benchmark run. This is evidence retrieval for a fixed result, not
-a re-roll of the benchmark.
+CAVEAT (2026-11-16)
+-------------------
+What this prints is the loop's *best attempt*, which on these two cases is the
+first attempt (ties go to the earliest). It is not what the model wrote after
+seeing the failing tests, so it can't show whether the model ever added
+`from None`.
 
-BACKGROUND
-----------
-Both error_translator and validation_chain fail because the LLM correctly
-converts `except E, e:` → `except E as e:` but does NOT add `from None` to
-re-raises. This means `__context__` is set on the re-raised exception, which
-the oracle asserts must be None.
-
-The finding is consistent across Gemini 2.5 Flash and Claude Sonnet 4.6 —
-two models from different providers produce byte-identical migrated output
-for both cases. See README.md Results → Cross-model comparison.
+It also can't be read as evidence of a model failure: these two oracles assert
+`__context__ is None`, but `raise ... from None` leaves `__context__` set (it
+sets `__suppress_context__` instead). No correct migration can pass them; the
+fix the oracles ask for scores the same 3/6 and 4/6 the models got. See the
+correction in docs/METHODOLOGY.md (Results).
 
 USAGE
 -----
