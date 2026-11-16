@@ -75,18 +75,13 @@ sandbox, reads the failures and repairs, until the tests pass or the budget runs
 | **Overall** | **41** | **40/41** | **39/41** | **39/41** |
 | Tokens used | | 55,517 | 59,807 | 122,748 |
 
-**What changed.** In May both models missed the same two cases. I first read that as a shared blind spot for
-`raise ... from None`. It was a bug in my tests: they checked `__context__ is None`, but `from None` leaves
-`__context__` set and only hides it, so no correct migration could pass. The fixed tests check what Python 2 users
-would actually see: the re-raised error prints on its own. Before rerunning, I checked them against five versions of
-each file (unmigrated, a naive port, `from e`, `from None` and raising after the `except` block); only the last two
-pass. On the rerun Claude fixed both cases in one repair each, with repairs the same size as its May ones.
+**The benchmark caught a bug in itself.** In May both models missed the same two cases. The cause was my tests, not
+the models: they checked `__context__ is None`, which `raise ... from None` never satisfies (it hides the old error
+but leaves it attached). The fixed tests check what a Python 2 user would actually see, and were verified against
+five versions of each file before rerunning. Claude then passed both, one repair each.
 
-**The new miss** is `zip_exhaustion`, which passed in May. Its first attempt passed 4/5, then a later repair came
-back as something that isn't Python twice in a row, which ends the loop. One run per model, reported as is.
-
-**Gemini** hasn't been rerun yet (its prepaid API credits ran out), so its column is still the May run with the two
-broken tests.
+**One run per model, reported as is.** The rerun's only miss is `zip_exhaustion`, where the model returned text that
+wasn't Python twice in a row. Gemini's column is the May run, before the fix.
 
 ## ⚡ Try it (no API key)
 
