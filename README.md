@@ -2,7 +2,7 @@
 
 # CodeShift
 
-### An LLM agent that ports Python 2 code to Python 3, then proves the port still behaves the same.
+### An LLM agent that ports Python 2 code to Python 3, then checks the port still behaves the same.
 
 *Code that parses isn't code that works. CodeShift checks the second one.*
 
@@ -42,7 +42,7 @@ sandbox, reads the failures and repairs, until the tests pass or the budget runs
 <table>
 <tr>
 <td align="center" width="25%"><h3>40 / 41</h3><sub>cases passed by Claude Sonnet 4.6 on the corrected benchmark</sub></td>
-<td align="center" width="25%"><h3>41 / 41</h3><sub>oracles proven to fail on unmigrated code, checked in CI</sub></td>
+<td align="center" width="25%"><h3>41 / 41</h3><sub>test files checked to fail on unmigrated code, in CI</sub></td>
 <td align="center" width="25%"><h3>96</h3><sub>unit tests that run offline, no API key needed</sub></td>
 <td align="center" width="25%"><h3>~49%</h3><sub>of Gemini's tokens for Claude on the same 41 cases (May run)</sub></td>
 </tr>
@@ -75,8 +75,8 @@ sandbox, reads the failures and repairs, until the tests pass or the budget runs
 | **Overall** | **41** | **40/41** | **39/41** | **39/41** |
 | Tokens used | | 55,517 | 59,807 | 122,748 |
 
-**The benchmark caught a bug in itself.** In May both models missed the same two cases. The cause was my tests, not
-the models: they checked `__context__ is None`, which `raise ... from None` never satisfies (it hides the old error
+**Two of my tests had a bug.** In May both models missed the same two cases. The cause was my tests, not the
+models: they checked `__context__ is None`, which `raise ... from None` never satisfies (it hides the old error
 but leaves it attached). The fixed tests check what a Python 2 user would actually see, and were verified against
 five versions of each file before rerunning. Claude then passed both, one repair each.
 
@@ -121,9 +121,10 @@ flowchart LR
 ### The benchmark
 
 * **Behavioral oracles.** Each case is a `source_py2.py` and a `test_behavior.py` that asserts what Python 2 returned: values, exception types, side effects.
-* **Bite-checked.** Every oracle must *fail* on its own unmigrated source, or it isn't testing anything. `python -m benchmark.bite_check` proves it for all 41, and CI runs it on every push.
-* **Honest bands.** In the "ambiguous" band a pass only means the model matched the one reading the test pins down, not that it recovered the author's intent. `csv_field_builder` is a known coin flip.
-* **One run, reported as is.** Each model ran the 41 cases once. No re-rolls to improve a number.
+* **Bite-checked.** Every oracle must *fail* on its own unmigrated source, or it isn't testing anything. `python -m benchmark.bite_check` checks it for all 41, and CI runs it on every push.
+* **The ambiguous band.** In that band a pass only means the model matched the one reading the test pins down, not that it recovered the author's intent. `csv_field_builder` is a known coin flip.
+* **One run, reported as is.** Every run covers all 41 cases once, with no re-rolls to improve a number. Claude was
+  rerun once, after the two broken tests were fixed.
 
 Full methodology, the pre-registered categories, per-case results and known limitations are in
 [docs/METHODOLOGY.md](docs/METHODOLOGY.md). Writing a new case is covered in [benchmark/README.md](benchmark/README.md).
@@ -131,7 +132,8 @@ Full methodology, the pre-registered categories, per-case results and known limi
 ### Run the real thing
 
 ```bash
-cp .env.example .env    # add GEMINI_API_KEY (free tier works) or ANTHROPIC_API_KEY
+cp .env.example .env    # add GEMINI_API_KEY or ANTHROPIC_API_KEY
+                        # (Gemini's free tier covers one file, not the ~60 calls of the full benchmark)
 
 # Migrate one file with a real model
 .venv/bin/python -m agent.migrate samples/migration_demo/source_py2.py --model gemini-2.5-flash
