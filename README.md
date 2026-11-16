@@ -4,12 +4,12 @@
 
 ### An LLM agent that ports Python 2 code to Python 3, then proves the port still behaves the same.
 
-*Claude and Gemini both passed the same 39 of 41 cases and failed the same two.*
+*Code that parses isn't code that works. CodeShift checks the second one.*
 
 <br/>
 
 [![Try it](https://img.shields.io/badge/Try%20it-no%20API%20key-00C853?style=for-the-badge&logo=gnubash&logoColor=white)](#-try-it-no-api-key)
-[![Results](https://img.shields.io/badge/Results-41%20cases-111111?style=for-the-badge&logo=pytest&logoColor=white)](#-the-finding)
+[![Results](https://img.shields.io/badge/Results-41%20cases-111111?style=for-the-badge&logo=pytest&logoColor=white)](#-results)
 [![Portfolio](https://img.shields.io/badge/Portfolio-gaurangkhurana.ca-111111?style=for-the-badge&logo=About.me&logoColor=white)](https://gaurangkhurana.ca)
 
 <br/>
@@ -21,7 +21,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/gkhurana21/codeshift/test.yml?branch=main&style=flat-square&label=CI)](https://github.com/gkhurana21/codeshift/actions/workflows/test.yml)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 
-[The problem](#the-problem) • [How it works](#-how-it-works) • [The finding](#-the-finding) • [Try it](#-try-it-no-api-key) • [Under the hood](#-under-the-hood)
+[The problem](#the-problem) • [How it works](#-how-it-works) • [Results](#-results) • [Try it](#-try-it-no-api-key) • [Under the hood](#-under-the-hood)
 
 </div>
 
@@ -41,9 +41,9 @@ sandbox, reads the failures and repairs, until the tests pass or the budget runs
 
 <table>
 <tr>
-<td align="center" width="25%"><h3>95.1%</h3><sub>39 of 41 cases passed, on both models</sub></td>
+<td align="center" width="25%"><h3>39 / 41</h3><sub>cases passed by Claude and by Gemini. The other 2 tests have a bug</sub></td>
 <td align="center" width="25%"><h3>41 / 41</h3><sub>oracles proven to fail on unmigrated code, checked in CI</sub></td>
-<td align="center" width="25%"><h3>Identical</h3><sub>pass/fail on every case across Anthropic and Google</sub></td>
+<td align="center" width="25%"><h3>96</h3><sub>unit tests that run offline, no API key needed</sub></td>
 <td align="center" width="25%"><h3>55%</h3><sub>of Gemini's tokens for Claude to reach the same score</sub></td>
 </tr>
 </table>
@@ -61,10 +61,10 @@ sandbox, reads the failures and repairs, until the tests pass or the budget runs
 </tr>
 </table>
 
-## 🎯 The finding
+## 📊 Results
 
 41 cases, each built around one Python 2 to 3 trap. The categories the agent should struggle with were written down
-**before** any model ran, so the failures landed where they were predicted, not explained afterwards.
+**before** any model ran.
 
 | Band | Cases | Gemini 2.5 Flash | Claude Sonnet 4.6 |
 |---|---:|---:|---:|
@@ -75,23 +75,12 @@ sandbox, reads the failures and repairs, until the tests pass or the budget runs
 | **Overall** | **41** | **39/41** | **39/41** |
 | Tokens used | | 122,748 | 67,527 |
 
-Two models from different companies got the same pass or fail on **every one of the 41 cases**. Both missed the
-same thing in both failures:
-
-```python
-# what both models wrote
-except KeyError as e:
-    raise AppError('missing config key: ' + str(e))
-
-# what keeps Python 2's behavior
-except KeyError as e:
-    raise AppError('missing config key: ' + str(e)) from None
-```
-
-Both fixed the old `except KeyError, e:` syntax. Neither added `from None`, so the original `KeyError` stays attached
-to the new error as `__context__`, which Python 2 never did. Repair loops on both models got stuck on the same
-answer. With two models that's a strong hint, not proof, that this is a blind spot of LLMs in general rather than of
-one model.
+**Known issue: the two failures are a bug in my tests, not in the models.** Both are cases where a migrated `except`
+block should hide the original error with `raise ... from None`. Their tests check `__context__ is None`, but
+`from None` leaves `__context__` set (it sets `__suppress_context__` instead), so no correct migration can pass them.
+Applied by hand, the exact fix the tests ask for scores the same 3/6 and 4/6 the models got. Fixing those two tests
+and re-running both models is next. Until then, read the result as both models passing the 39 cases whose tests
+are sound.
 
 ## ⚡ Try it (no API key)
 
